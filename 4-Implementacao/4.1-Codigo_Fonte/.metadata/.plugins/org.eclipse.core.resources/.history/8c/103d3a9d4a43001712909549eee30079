@@ -1,0 +1,206 @@
+package br.com.eits.boot.domain.entity;
+
+import java.io.Serializable;
+import java.util.Calendar;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+
+import org.directwebremoting.annotations.DataTransferObject;
+import org.hibernate.annotations.Type;
+//import org.hibernate.envers.Audited;
+import org.hibernate.validator.constraints.NotBlank;
+
+import br.com.eits.common.domain.entity.AbstractEntity;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+/**
+ * 
+ * @since 02/06/2014
+ * @version 1.0
+ * @category
+ */
+@Data
+@Entity
+@Table(name = "\"farmacia\"")
+@EqualsAndHashCode(callSuper=true)
+@DataTransferObject(javascript = "Farmacia")
+public class Farmacia extends AbstractEntity implements Serializable
+{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4052986759552589018L;
+
+	/*-------------------------------------------------------------------
+	 *				 		     ATTRIBUTES
+	 *-------------------------------------------------------------------*/
+		 
+	// Basic
+	@NotNull
+	@NotBlank
+	@Column(name = "razao_social", nullable = false, length = 100)
+	private String razaoSocial;
+	/**
+	 * 
+	 */
+	@NotNull
+	@NotBlank
+	@Column(name = "nome_fantasia", nullable = false, length = 15)
+	private String nomeFantasia;
+	/**
+	 * 
+	 */
+	@NotNull
+	@NotBlank
+	@Column(name = "cnpj", nullable = false, length = 11)
+	private String cnpj;
+	/**
+	 * 
+	 */
+	@NotNull
+	@NotBlank
+	@Column(name = "inscricao_estadual", nullable = false, length = 11)
+	private String inscricaoEstadual;
+	/**
+	 * 
+	 */
+	@NotNull
+	@NotBlank
+	@Column(name = "telefone", nullable = false, length = 11)
+	private String telefone;
+	/**
+	 * 
+	 */
+	@NotNull
+	@NotBlank
+	@Column(name = "email", nullable = false, length = 11)
+	private String email;
+	/**
+	 * 
+	 */
+	@NotNull
+	@NotBlank
+	@Column(name = "cnpj", nullable = false, length = 11)
+	private String cnpj;
+	/**
+	 * 
+	 */
+	@NotNull
+	@NotBlank
+	@Column(name = "cep", nullable = false, length = 8)
+	private String cep;
+	/**
+	 * 
+	 */
+	@NotNull
+	@NotBlank
+	@Column(name = "logradouro", nullable = false, length = 11)
+	private String logradouro;
+	/**
+	 * 
+	 */
+	@NotNull
+	@NotBlank
+	@Column(name = "numero", nullable = false, length = 11)
+	private Integer numero;
+	/**
+	 * 
+	 */
+	@NotNull
+	@NotBlank
+	@Column(name = "cnpj", nullable = false, length = 11)
+	private String cnpj;
+	/**
+	 * 
+	 */
+	@NotNull
+	@NotBlank
+	@Column(name = "cnpj", nullable = false, length = 11)
+	private String cnpj;
+	/**
+	 * 
+	 */
+	@NotNull
+	@NotBlank
+	@Column(name = "cnpj", nullable = false, length = 11)
+	private String cnpj;
+	/**
+	 * 
+	 */
+	@NotNull
+	@NotBlank
+	@Column(name = "cnpj", nullable = false, length = 11)
+	private String cnpj;
+	/**
+	 * 
+	 */
+	@NotNull
+	@Column(name = "ativo", nullable = false)
+	private Boolean ativo;
+
+	/*-------------------------------------------------------------------
+	 * 		 					CONSTRUCTORS
+	 *-------------------------------------------------------------------*/
+	/**
+	 * 
+	 */
+	public Farmacia()
+	{
+	}
+
+	/**
+	 * 
+	 * @param id
+	 */
+	public Farmacia ( Long id )
+	{
+		super( id );
+	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @param nome
+	 * @param rg
+	 * @param cpf
+	 * @param dataNascimento
+	 * @param telefone
+	 * @param celular
+	 * @param cep
+	 * @param logradouro
+	 * @param numero
+	 * @param bairro
+	 * @param complemento
+	 * @param dataCadastro
+	 * @param ativo;
+	 */
+	public Farmacia( Long id, String nome, String rg, String cpf, Calendar dataNascimento, String telefone, String celular, Boolean ativo)
+	{
+		super( id );
+		this.nome = nome;
+		this.rg = rg;
+		this.cpf = cpf;
+		this.dataNascimento = dataNascimento;
+		this.telefone = telefone;
+		this.celular = celular;
+		this.ativo = ativo;
+	}
+
+	/*-------------------------------------------------------------------
+	 *							BEHAVIORS
+	 *-------------------------------------------------------------------*/
+	/**
+	 * 
+	 */
+	@Transient
+	public boolean isAtivo()
+	{
+		return this.ativo;
+	}
+
+}

@@ -49,11 +49,10 @@ public enum UsuarioPerfil implements GrantedAuthority
 		if ( this.equals( UsuarioPerfil.ADMINISTRADOR ) )
 		{
 			authorities.add( UsuarioPerfil.COMERCIAL );
+			authorities.add( UsuarioPerfil.FINANCEIRO );
+			authorities.add( UsuarioPerfil.ASSOCIADO );
+			authorities.add( UsuarioPerfil.ATENDENTE );
 		}
-
-		//authorities.add( UsuarioPerfil.FINANCEIRO_VALOR );
-		//authorities.add( UsuarioPerfil.ASSOCIADO_VALOR );
-		//authorities.add( UsuarioPerfil.ATENDENTE_VALOR );
 
 		return authorities;
 	}

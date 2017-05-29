@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import br.com.eits.boot.domain.entity.associado.Associado;
-import br.com.eits.boot.domain.repository.associado.IAssociadoRepositorio;
+import br.com.eits.boot.domain.entity.Associado;
+import br.com.eits.boot.domain.repository.IAssociadoRepositorio;
 import br.com.eits.common.application.i18n.MessageSourceHolder;
 
 /**

@@ -12,7 +12,7 @@ import org.springframework.util.Assert;
 
 import br.com.eits.boot.domain.entity.conta.Usuario;
 import br.com.eits.boot.domain.entity.conta.UsuarioPerfil;
-import br.com.eits.boot.domain.repository.conta.IUsuarioRepositorio;
+import br.com.eits.boot.domain.repository.IUsuarioRepositorio;
 import br.com.eits.common.application.i18n.MessageSourceHolder;
 
 /**
@@ -68,6 +68,17 @@ public class UsuarioServico
 		final Usuario usuario = this.usuarioRepositorio.findOne( id );
 		Assert.notNull( usuario, MessageSourceHolder.getMessage("repository.notFoundById", id) );
 		return usuario;
+	}
+
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@Transactional(readOnly=true)
+	public Page<Usuario> buscarPorEmail( String filter, PageRequest pageable )
+	{
+		return this.usuarioRepositorio.listByFilters( filter, pageable );
 	}
 	
 	/**

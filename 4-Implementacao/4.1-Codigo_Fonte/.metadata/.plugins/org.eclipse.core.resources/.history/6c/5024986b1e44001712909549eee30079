@@ -1,0 +1,64 @@
+package br.com.eits.boot.test.domain.entity;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import br.com.eits.boot.domain.entity.Associado;
+import br.com.eits.boot.test.domain.AbstractUnitTests;
+
+/**
+ * 
+ * @author rodrigo@eits.com.br
+ * @since 09/05/2013
+ * @version 1.0
+ */
+public class AssociadoTestes extends AbstractUnitTests
+{
+	/*-------------------------------------------------------------------
+	 *                           ATTRIBUTES
+	 *-------------------------------------------------------------------*/
+
+	/*-------------------------------------------------------------------
+	 *                           TESTS
+	 *-------------------------------------------------------------------*/
+	/**
+     * 
+     */
+	@Test
+	public void autorizacaoAdministradorDevePassar()
+	{
+		final Associado associado = new Associado();
+		associado.setNome("Teste");
+		
+		Assert.assertNotNull( associado.getAuthorities() );
+		Assert.assertTrue( user.getAuthorities().contains( AssociadoPerfil.ADMINISTRADOR ) );
+		Assert.assertTrue( user.getAuthorities().contains( AssociadoPerfil.COMERCIAL ) );
+		Assert.assertTrue( user.getAuthorities().contains( AssociadoPerfil.FINANCEIRO ) );
+		Assert.assertTrue( user.getAuthorities().contains( AssociadoPerfil.ASSOCIADO ) );
+		Assert.assertTrue( user.getAuthorities().contains( AssociadoPerfil.ATENDENTE ) );
+	}
+	/**
+     * 
+     */
+	@Test
+	public void atendenteAcessandoFinanceiro()
+	{
+		final Associado user = new Associado();
+		user.setPerfil( AssociadoPerfil.ATENDENTE );
+		
+		Assert.assertNotNull( user.getAuthorities() );
+		Assert.assertTrue( user.getAuthorities().contains( AssociadoPerfil.FINANCEIRO ) );
+	}
+	/**
+     * 
+     */
+	@Test
+	public void associadoAcessandoAssociado()
+	{
+		final Associado user = new Associado();
+		user.setPerfil( AssociadoPerfil.ASSOCIADO );
+		
+		Assert.assertNotNull( user.getAuthorities() );
+		Assert.assertTrue( user.getAuthorities().contains( AssociadoPerfil.ASSOCIADO ) );
+	}
+}

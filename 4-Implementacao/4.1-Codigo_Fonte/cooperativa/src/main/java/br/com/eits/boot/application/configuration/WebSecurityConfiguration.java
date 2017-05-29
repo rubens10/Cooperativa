@@ -2,12 +2,15 @@ package br.com.eits.boot.application.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import br.com.eits.boot.application.security.AuthenticationFailureHandler;
 import br.com.eits.boot.application.security.AuthenticationSuccessHandler;
@@ -19,6 +22,7 @@ import br.com.eits.boot.application.security.AuthenticationSuccessHandler;
 @Configuration
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
 {
 	/*-------------------------------------------------------------------
@@ -35,6 +39,12 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
 	@Autowired
 	private AuthenticationSuccessHandler authenticationSuccessHandler;
 
+	
+	@Bean
+	public UserDetailsService userDetailsServiceBean() throws Exception {
+	    return super.userDetailsServiceBean();
+	}
+	
 	/*-------------------------------------------------------------------
 	 * 		 					 OVERRIDES
 	 *-------------------------------------------------------------------*/

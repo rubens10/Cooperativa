@@ -15,7 +15,7 @@ import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.directwebremoting.annotations.DataTransferObject;
-import org.hibernate.envers.Audited;
+//import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
@@ -33,7 +33,6 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @Entity
-@Audited
 @Table(name = "\"usuario\"")
 @EqualsAndHashCode(callSuper=true)
 @DataTransferObject(javascript = "Usuario")
@@ -53,14 +52,14 @@ public class Usuario extends AbstractEntity implements Serializable
 	 */
 	@Email
 	@NotNull
-	@Column(nullable = false, length = 144, unique = true)
+	@Column(name = "email", nullable = false, length = 144, unique = true)
 	private String email;
 	/**
 	 * 
 	 */
 	@NotBlank
 	@Length(min = 8)
-	@Column(nullable = false, length = 20)
+	@Column(name = "senha", nullable = false, length = 20)
 	private String senha;
 	/**
 	 * 
@@ -73,7 +72,7 @@ public class Usuario extends AbstractEntity implements Serializable
 	 * 
 	 */
 	@NotNull
-	@Column(nullable = false)
+	@Column(name = "ativo", nullable = false)
 	private Boolean ativo;
 
 	/*-------------------------------------------------------------------
@@ -137,7 +136,6 @@ public class Usuario extends AbstractEntity implements Serializable
 	/**
 	 * 
 	 */
-	@Transient
 	public boolean isAtivo()
 	{
 		return !this.ativo;
@@ -149,7 +147,6 @@ public class Usuario extends AbstractEntity implements Serializable
 	 * org.springframework.security.core.userdetails.UserDetails#getPassword()
 	 
 	@Override*/
-	@Transient
 	public String getSenha()
 	{
 		return this.senha;
@@ -172,13 +169,11 @@ public class Usuario extends AbstractEntity implements Serializable
 		return this.email;
 	}
 
-	@Transient
 	public void setEmail(String email)
 	{
 		this.email = email;
 	}
 	
-	@Transient
 	public void setSenha(String senha)
 	{
 		this.senha = senha;

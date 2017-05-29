@@ -1,3 +1,4 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -9,7 +10,7 @@ import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { SigninView } from './views/signin/signin-view.component';
 
 /**
- * 
+ *
  */
 @NgModule( {
     declarations: [
@@ -18,6 +19,7 @@ import { SigninView } from './views/signin/signin-view.component';
     imports: [
         CovalentCoreModule.forRoot(),
         CovalentLayoutModule.forRoot(),
+        BrowserAnimationsModule,
         BrowserModule,
         FormsModule,
         HttpModule,
@@ -26,7 +28,7 @@ import { SigninView } from './views/signin/signin-view.component';
     providers: [],
     bootstrap: [SigninView]
 })
-export class AuthenticationModule 
+export class AuthenticationModule
 {
     /*-------------------------------------------------------------------
      *                           ATTRIBUTES

@@ -13,8 +13,8 @@ import org.springframework.security.core.Authentication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import br.com.eits.boot.domain.entity.account.User;
-import br.com.eits.boot.domain.repository.account.IUserRepository;
+import br.com.eits.boot.domain.entity.conta.Usuario;
+import br.com.eits.boot.domain.repository.IUsuarioRepositorio;
 
 /**
  * 
@@ -35,7 +35,7 @@ public class AuthenticationSuccessHandler implements org.springframework.securit
 	 * 
 	 */
 	@Autowired
-	private IUserRepository userRepository;
+	private IUsuarioRepositorio userRepository;
 
 	/*-------------------------------------------------------------------
 	 * 		 					BEHAVIORS
@@ -49,12 +49,12 @@ public class AuthenticationSuccessHandler implements org.springframework.securit
 	{
 		try
 		{
-			final User user = this.userRepository.findOne( ContextHolder.getAuthenticatedUser().getId() );
-			user.setLastLogin( Calendar.getInstance() );
+			final Usuario user = this.userRepository.findOne( ContextHolder.getAuthenticatedUser().getId() );
+			//user.setLastLogin( Calendar.getInstance() );
 			this.userRepository.save( user );
 			
 			//add the user in the response
-			user.setPassword( null );
+			//user.setPassword( null );
 			response.getWriter().write( new ObjectMapper().writeValueAsString(user) );
 		}
 		catch ( Exception e )
