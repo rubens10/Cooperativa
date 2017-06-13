@@ -1,0 +1,47 @@
+<md-card>
+  <md-toolbar>
+        <div class="md-toolbar-tools">
+          <button routerLink="/associado-formulario" md-button color="accent" class="text-upper">Cadastrar</button>
+        </div>
+  </md-toolbar>
+
+  <div layout="row" layout-align="start center" class="pad-left-sm pad-right-sm">
+    <span *ngIf="!searchBox.searchVisible" class="push-left-sm">
+      <span class="md-title">Listagem de Associados</span>
+    </span>
+    <td-search-box #searchBox backIcon="arrow_back" class="push-right-sm" placeholder="Buscar" (searchDebounce)="onBuscar($event)" flex>
+    </td-search-box>
+  </div>
+
+  <md-divider></md-divider>
+  <br>
+
+  <md-list class="pull-top">
+    <md-list-item>
+      <!--<md-icon md-list-avatar>apps</md-icon>-->
+      <h3 md-line>Associado</h3>
+      <span flex></span>
+      <span flex="30" class="pad-left md-body-1 tc-grey-500">
+        <h3 md-line>CPF</h3>
+      </span>
+      <span flex="30" class="md-body-1 tc-grey-500">
+        <h3 md-line>Modificado em</h3>
+      </span>
+    </md-list-item>
+
+    <md-divider></md-divider>
+
+    <ng-template let-item="$implicit" let-i="index" let-last="last" ngFor [ngForOf]="associados">
+      <a md-list-item routerLink="/associado-formulario/{{associados[i].id}}" style="text-decoration:none">
+        <!--<md-icon md-list-avatar>people</md-icon>-->
+        <h3 md-line>{{associados[i].nome}}</h3>
+        <p md-line></p>
+        <span flex></span>
+        <span flex="30" class="md-body-1 tc-grey-500">{{associados[i].cpf}}</span>
+        <span flex="30" class="md-body-1 tc-grey-500">{{associados[i].updated}}</span>
+      </a>
+      <md-divider *ngIf="!last"></md-divider>
+    </ng-template>
+  </md-list>
+
+</md-card>

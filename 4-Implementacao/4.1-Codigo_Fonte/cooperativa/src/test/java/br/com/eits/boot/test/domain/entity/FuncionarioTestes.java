@@ -30,7 +30,7 @@ public class FuncionarioTestes extends AbstractUnitTests
 		funcionario.setAtivo( true );
 		
 		Assert.assertNotNull( funcionario.getNome() );
-		Assert.assertTrue( funcionario.isAtivo() );
+		Assert.assertTrue( funcionario.getAtivo() );
 	}
 	/**
      * 
@@ -43,6 +43,6 @@ public class FuncionarioTestes extends AbstractUnitTests
 		funcionario.setAtivo( false );
 		
 		Assert.assertNotNull( funcionario.getNome() );
-		Assert.assertFalse( funcionario.isAtivo() );
+		Assert.assertFalse( funcionario.getAtivo() );
 	}
 }

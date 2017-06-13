@@ -1,0 +1,33 @@
+<td-layout-nav sidenavTitle="title" logo="logo" icon="icon" color="primary">
+  <div td-toolbar-content>
+    Cooperfarma
+  </div>
+  <td-layout-manage-list opened="true" mode="side" sidenavWidth="257px">
+    <md-toolbar td-sidenav-content>
+      Seja bem-vindo
+    </md-toolbar>
+    <md-nav-list td-sidenav-content>
+      <a routerLink="/" md-list-item><md-icon>home</md-icon>Principal</a>
+      <a routerLink="/usuario-listagem" md-list-item><md-icon>people</md-icon>Usuários</a>
+      <a routerLink="/associado-listagem" md-list-item><md-icon>group_work</md-icon>Associados</a>
+      <a routerLink="/farmacia-listagem" md-list-item><md-icon>store_mall_directory</md-icon>Farmácias</a>
+      <a routerLink="/funcionario-listagem" md-list-item><md-icon>people_outline</md-icon>Funcionários</a>
+      <a routerLink="" md-list-item><md-icon>today</md-icon>Atendimentos</a>
+      <a href="/logout" md-list-item><md-icon>exit_to_app</md-icon>Sair</a>
+    </md-nav-list>
+    <div td-toolbar-content>
+      Painel administrativo
+    </div>
+
+    <router-outlet></router-outlet>
+
+    <td-layout-footer-inner>
+      Painel administrativo - Cooperfarma 2017
+    </td-layout-footer-inner>
+  </td-layout-manage-list>
+  <td-layout-footer color="primary">
+    Todos os direitos reservados
+  </td-layout-footer>
+</td-layout-nav>
+
+<!--<a routerLink="usuario-formulario" routerLinkActive="active">Formulario</a>-->

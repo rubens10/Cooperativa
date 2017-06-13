@@ -4,11 +4,15 @@ import org.directwebremoting.annotations.RemoteProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import br.com.eits.boot.domain.entity.Farmacia;
 import br.com.eits.boot.domain.entity.Funcionario;
+import br.com.eits.boot.domain.entity.conta.Usuario;
+import br.com.eits.boot.domain.entity.conta.UsuarioPerfil;
 import br.com.eits.boot.domain.repository.IFuncionarioRepositorio;
 import br.com.eits.common.application.i18n.MessageSourceHolder;
 
@@ -40,11 +44,37 @@ public class FuncionarioServico
 	 * @param user
 	 * @return
 	 */
-	public Funcionario inserirFuncionario( Funcionario funcionario )
+	public Funcionario salvarFuncionario( Funcionario funcionario )
 	{
-		funcionario.setAtivo( false );
-		
+		System.out.println( funcionario );
 		return this.funcionarioRepositorio.save( funcionario );
+	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@PreAuthorize("hasAnyAuthority('"+UsuarioPerfil.ADMINISTRADOR_VALOR+"','"+UsuarioPerfil.COMERCIAL_VALOR+"')")
+	public Funcionario removerFuncionario( long id )
+	{
+		final Funcionario funcionario = this.funcionarioRepositorio.findOne( id );
+		funcionario.setAtivo( false );
+		funcionario.setExcluido( true );
+	
+		return this.funcionarioRepositorio.save( funcionario );
+	}
+
+	/**
+	 * 
+	 */
+	public Funcionario getInstancia()
+	{
+		final Funcionario funcionario = new Funcionario();
+		funcionario.setAtivo( false );
+		funcionario.setExcluido( false );
+	
+		return funcionario;
 	}
 	
 	/**
@@ -67,11 +97,22 @@ public class FuncionarioServico
 	 * @return
 	 */
 	@Transactional(readOnly=true)
-	public Page<Funcionario> buscarUsuariosPorFiltros( String filter, PageRequest pageable )
+	public Page<Funcionario> buscarFuncionariosPorFiltros( String filter, PageRequest pageable )
 	{
 		return this.funcionarioRepositorio.listByFilters( filter, pageable );
 	}
 
+	/**
+	 * 
+	 * @param pageable
+	 * @param filter
+	 * @return
+	 */
+	@Transactional(readOnly=true)
+	public Page<Funcionario> buscarFuncionariosExcluidos( String filter, PageRequest pageable )
+	{
+		return this.funcionarioRepositorio.listarPorExcluido( filter, pageable );
+	}
 	/**
 	 * 
 	 * @param pageable

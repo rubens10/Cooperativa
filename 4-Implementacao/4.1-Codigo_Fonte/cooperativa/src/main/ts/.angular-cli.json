@@ -5,16 +5,16 @@
 	},
 	"apps": [
 		{
-			"name": "authentication",
-			"root": "src/authentication",
-			"deployUrl": "modules/authentication/",
-			"outDir": "../resources/META-INF/resources/modules/authentication",
+			"name": "autenticacao",
+			"root": "src/autenticacao",
+			"deployUrl": "modules/autenticacao/",
+			"outDir": "../resources/META-INF/resources/modules/autenticacao",
 			"assets": [],
 			"index": "index.html",
 			"main": "main.ts",
 			"polyfills": "../polyfills.ts",
 			"tsconfig": "../tsconfig.app.json",
-			"prefix": "authentication",
+			"prefix": "autenticacao",
 			"styles": [
 				"../../node_modules/@covalent/core/common/platform.scss",
 				"../theme.scss"
@@ -27,16 +27,38 @@
 			}
 		},
 		{
-			"name": "home",
-			"root": "src/home",
-			"deployUrl": "modules/home/",
-			"outDir": "../resources/META-INF/resources/modules/home",
+			"name": "administrativo",
+			"root": "src/administrativo",
+			"deployUrl": "modules/administrativo/",
+			"outDir": "../resources/META-INF/resources/modules/administrativo",
 			"assets": [],
 			"index": "index.html",
 			"main": "main.ts",
 			"polyfills": "../polyfills.ts",
 			"tsconfig": "../tsconfig.app.json",
-			"prefix": "home",
+			"prefix": "administrativo",
+			"styles": [
+				"../../node_modules/@covalent/core/common/platform.scss",
+				"../theme.scss"
+			],
+			"scripts": [],
+			"environmentSource": "../environments/environment.ts",
+			"environments": {
+				"dev": "../environments/environment.ts",
+				"prod": "../environments/environment.prod.ts"
+			}
+		},
+		{
+			"name": "central-associado",
+			"root": "src/central-associado",
+			"deployUrl": "modules/central-associado/",
+			"outDir": "../resources/META-INF/resources/modules/central-associado",
+			"assets": [],
+			"index": "index.html",
+			"main": "main.ts",
+			"polyfills": "../polyfills.ts",
+			"tsconfig": "../tsconfig.app.json",
+			"prefix": "central-associado",
 			"styles": [
 				"../../node_modules/@covalent/core/common/platform.scss",
 				"../theme.scss"

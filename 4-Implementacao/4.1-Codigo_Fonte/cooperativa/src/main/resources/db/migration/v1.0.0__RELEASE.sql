@@ -1,3 +1,44 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.5.4
+-- Dumped by pg_dump version 9.5.1
+
+-- Started on 2017-03-07 12:37:22 BRT
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 8 (class 2615 OID 37480)
+-- Name: auditing; Type: SCHEMA; Schema: -; Owner: -
+--
+
+CREATE SCHEMA IF NOT EXISTS public;
+
+
+--
+-- TOC entry 2 (class 3079 OID 12623)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 1 (class 3079 OID 17001)
+-- Name: unaccent; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS unaccent WITH SCHEMA pg_catalog;
+
+/*
 CREATE TABLE pais (
  id_pais bigint NOT NULL,
  pais VARCHAR(20) NOT NULL
@@ -147,3 +188,10 @@ ALTER TABLE atendimento ADD CONSTRAINT PK_atendimento PRIMARY KEY (id);
 ALTER TABLE atendimento ADD CONSTRAINT FK_atendimento_usuario FOREIGN KEY (id_funcionario,id_associado) REFERENCES usuario (id_funcionario,id_associado);
 ALTER TABLE atendimento ADD CONSTRAINT FK_atendimento_assunto FOREIGN KEY (id_tipo_assunto) REFERENCES tipo_assunto (id_tipo_assunto);
 ALTER TABLE atendimento ADD CONSTRAINT FK_atendimento_situacao FOREIGN KEY (id_tipo_situacao) REFERENCES tipo_situacao (id_tipo_situacao);
+
+----------------------- 
+-- DEFAULT DATA
+-----------------------
+INSERT INTO "public"."usuario"(
+            id, created, updated, email, ativo, senha, perfil)
+    VALUES (1, NOW(), null, 'admin@admin.com', TRUE, '$2a$10$bAdAVLvM.k3DqPaPYi0gnO1OffPSHLref8MElAk.u.fFQ17v9YKC2', 0);*/

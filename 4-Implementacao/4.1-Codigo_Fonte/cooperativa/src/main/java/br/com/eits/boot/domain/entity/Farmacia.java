@@ -69,7 +69,7 @@ public class Farmacia extends AbstractEntity implements Serializable
 	 */
 	@NotNull
 	@NotBlank
-	@Column(name = "cnpj", nullable = false, length = 10)
+	@Column(name = "cnpj", nullable = false, length = 14)
 	private String cnpj;
 	/**
 	 * 
@@ -152,7 +152,6 @@ public class Farmacia extends AbstractEntity implements Serializable
 	 * 
 	 */
 	@NotNull
-	@NotBlank
 	@Column(name = "info_complementar", nullable = false, length = 255)
 	private String informacaoComplementar;
 	/**
@@ -161,6 +160,12 @@ public class Farmacia extends AbstractEntity implements Serializable
 	@NotNull
 	@Column(name = "ativo", nullable = false)
 	private Boolean ativo;
+	/**
+	 * 
+	 */
+	@NotNull
+	@Column(name = "excluido", nullable = false)
+	private Boolean excluido;
 
 	/*-------------------------------------------------------------------
 	 * 		 					CONSTRUCTORS
@@ -199,8 +204,10 @@ public class Farmacia extends AbstractEntity implements Serializable
 	 * @param estado
 	 * @param pais
 	 * @param informacaoComplementar
+	 * @param ativo
+	 * @param excluido
 	 */          
-	public Farmacia( Long id, String razaoSocial, String nomeFantasia, String cnpj, String inscricaoEstadual, String telefone, String email, String cep, String logradouro, String numero, String bairro, String complemento, String cidade, String estado, String pais, String informacaoComplementar, Boolean ativo)
+	public Farmacia( Long id, String razaoSocial, String nomeFantasia, String cnpj, String inscricaoEstadual, String telefone, String email, String cep, String logradouro, String numero, String bairro, String complemento, String cidade, String estado, String pais, String informacaoComplementar, Boolean ativo, Boolean excluido)
 	{
 		super( id );
 		this.razaoSocial = razaoSocial;
@@ -218,18 +225,13 @@ public class Farmacia extends AbstractEntity implements Serializable
 		//this.estado = estado;
 		//this.pais = pais;
 		this.informacaoComplementar = informacaoComplementar;
+		this.ativo = ativo;
+		this.excluido = excluido;
 	}
 
 	/*-------------------------------------------------------------------
 	 *							BEHAVIORS
 	 *-------------------------------------------------------------------*/
-	/**
-	 * 
-	 */
-	@Transient
-	public boolean isAtivo()
-	{
-		return this.ativo;
-	}
+	
 
 }

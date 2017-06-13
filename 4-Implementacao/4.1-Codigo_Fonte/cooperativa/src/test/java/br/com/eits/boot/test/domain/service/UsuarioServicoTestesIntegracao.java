@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.jdbc.Sql;
@@ -26,7 +27,7 @@ public class UsuarioServicoTestesIntegracao extends AbstractIntegrationTests
 	 * 
 	 */
 	@Autowired
-	private UsuarioServico accountService;
+	private UsuarioServico usuarioServico;
 	
 	/*-------------------------------------------------------------------
 	 *				 		      TESTS
@@ -34,10 +35,15 @@ public class UsuarioServicoTestesIntegracao extends AbstractIntegrationTests
 	/**
 	 * 
 	 */
-	@Test(expected = AuthenticationCredentialsNotFoundException.class)
-	public void insertUserMustFail() 
+	@Test(expected=AccessDeniedException.class)
+	@WithUserDetails("abc@testes.com")
+	@Sql({
+		"/dataset/usuarios.sql"
+	})
+	public void salvarUsuarioDeveFalhar() 
 	{
-		this.accountService.inserirUsuario( new Usuario() );
+		this.usuarioServico.salvarUsuario( new Usuario() );
+		Assert.fail("Deveria retornar erro de acesso negado");
 	}
 	
 	/**
@@ -46,12 +52,12 @@ public class UsuarioServicoTestesIntegracao extends AbstractIntegrationTests
 	@Test
 	@WithUserDetails("admin@email.com")
 	@Sql({
-		"/dataset/account/users.sql"
+		"/dataset/usuarios.sql"
 	})
 	public void inserirUsuarioDevePassar()
 	{
-		Usuario user = new Usuario( null, "test@user.com", "user", true, UsuarioPerfil.ATENDENTE );
-		user = this.accountService.inserirUsuario( user );
+		Usuario user = new Usuario( null, "test@user.com", "user", true, UsuarioPerfil.ATENDENTE, false );
+		user = this.usuarioServico.salvarUsuario( user );
 
 		Assert.assertNotNull( user );
 		Assert.assertNotNull( user.getId() );
@@ -64,11 +70,11 @@ public class UsuarioServicoTestesIntegracao extends AbstractIntegrationTests
 	 */
 	@Test
 	@Sql({
-		"/dataset/account/users.sql"
+		"/dataset/usuarios.sql"
 	})
-	public void findUserByIdMustPass()
+	public void buscarUsuarioPorIdDevePassar()
 	{
-		final Usuario user = this.accountService.buscarUsuarioPorId( 9999L );
+		final Usuario user = this.usuarioServico.buscarUsuarioPorId( 9999L );
 	
 		Assert.assertNotNull( user );
 		Assert.assertNotNull( user.getId() );
@@ -81,14 +87,14 @@ public class UsuarioServicoTestesIntegracao extends AbstractIntegrationTests
 	 */
 	@Test
 	@Sql({
-		"/dataset/account/users.sql"
+		"/dataset/usuarios.sql"
 	})
-	public void listUsersByFiltersMustReturn2()
+	public void listarUsuariosPorFiltrosDeveRetornar1()
 	{
-		final Page<Usuario> users = this.accountService.listarUsuariosPorFiltros( "user", null );
+		final Page<Usuario> usuarios = this.usuarioServico.listarUsuariosPorFiltros( "abc", null );
 		
-		Assert.assertNotNull( users );
-		Assert.assertEquals( 2, users.getTotalElements() );
+		Assert.assertNotNull( usuarios );
+		Assert.assertEquals( 1, usuarios.getTotalElements());
 	}
 	
 	/**
@@ -96,14 +102,30 @@ public class UsuarioServicoTestesIntegracao extends AbstractIntegrationTests
 	 */
 	@Test
 	@Sql({
-		"/dataset/account/users.sql"
+		"/dataset/usuarios.sql"
 	})
-	public void listUsersByFiltersMustReturn3()
+	public void listarUsuariosPorFiltrosDeveRetornar2()
 	{
-		final Page<Usuario> users = this.accountService.listarUsuariosPorFiltros( "1000,1001,xó", null );
+		final Page<Usuario> usuarios = this.usuarioServico.listarUsuariosPorFiltros( "user", null );
 		
-		Assert.assertNotNull( users );
-		Assert.assertEquals( 3, users.getTotalElements());
+		Assert.assertNotNull( usuarios );
+		Assert.assertEquals( 2, usuarios.getTotalElements() );
+	}
+	
+
+	/**
+	 * 
+	 */
+	@Test
+	@Sql({
+		"/dataset/usuarios.sql"
+	})
+	public void listarUsuariosPorFiltrosDeveRetornar3()
+	{
+		final Page<Usuario> usuarios = this.usuarioServico.listarUsuariosPorFiltros( "1000,1001,abc", null );
+		
+		Assert.assertNotNull( usuarios );
+		Assert.assertEquals( 3, usuarios.getTotalElements());
 	}
 	
 	/**
@@ -111,28 +133,13 @@ public class UsuarioServicoTestesIntegracao extends AbstractIntegrationTests
 	 */
 	@Test
 	@Sql({
-		"/dataset/account/users.sql"
+		"/dataset/usuarios.sql"
 	})
-	public void listUsersByFiltersMustReturn1()
+	public void listUsersByFiltersDeveRetornarTodos()
 	{
-		final Page<Usuario> users = this.accountService.listarUsuariosPorFiltros( "xó", null );
+		final Page<Usuario> usuarios = this.usuarioServico.listarUsuariosPorFiltros( null, null );
 		
-		Assert.assertNotNull( users );
-		Assert.assertEquals( 1, users.getTotalElements());
-	}
-	
-	/**
-	 * 
-	 */
-	@Test
-	@Sql({
-		"/dataset/account/users.sql"
-	})
-	public void listUsersByFiltersMustReturnAll()
-	{
-		final Page<Usuario> users = this.accountService.listarUsuariosPorFiltros( null, null );
-		
-		Assert.assertNotNull( users );
-		Assert.assertEquals( 4, users.getTotalElements() );
+		Assert.assertNotNull( usuarios );
+		Assert.assertEquals( 4, usuarios.getTotalElements() );
 	}
 }

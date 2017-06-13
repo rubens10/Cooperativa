@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "ng serve -a home --proxy-config proxy.conf.json",
-    "mavenbuild": "node node_modules/.bin/ng build -a authentication && node node_modules/.bin/ng build -a home"
+    "start": "ng serve -a administrativo --proxy-config proxy.conf.json",
+    "mavenbuild": "node node_modules/.bin/ng build -a autenticacao && node node_modules/.bin/ng build -a administrativo && node node_modules/.bin/ng build -a central-associado"
   },
   "dependencies": {
     "@angular/animations": "4.1.2",
@@ -19,6 +19,7 @@
     "@angular/platform-server": "^4.1.2",
     "@angular/router": "^4.1.2",
     "@covalent/core": "^1.0.0-beta.3-2",
+    "@covalent/dynamic-forms": "^1.0.0-beta.5",
     "eits-ng2": "^1.0.7",
     "rxjs": "^5.4.0",
     "typescript": "^2.3.2",

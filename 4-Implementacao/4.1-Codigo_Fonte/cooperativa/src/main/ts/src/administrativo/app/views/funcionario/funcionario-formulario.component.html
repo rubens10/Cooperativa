@@ -1,0 +1,17 @@
+<md-card>
+  <br>
+  <div layout="row" layout-align="start center" class="pad-left-sm pad-right-sm">
+    <span class="push-left-sm">
+      <span class="md-title">Formulário de Funcionário</span>
+    </span>
+  </div>
+  <td-dynamic-forms #formulario [elements]="elements" [FormGroup]="formulario" (submit)="onSalvar()">
+    <md-toolbar>
+      <button type="submit" md-button color="accent" class="text-upper">Salvar</button>
+      <div [hidden]="excluirRegistro">
+        <button type="button" (click)="onExcluir()" md-button class="text-upper">Excluir</button>
+      </div>
+      <button type="button" routerLink="/funcionario-listagem" md-button class="text-upper">Voltar</button>
+    </md-toolbar>
+  </td-dynamic-forms>
+</md-card>

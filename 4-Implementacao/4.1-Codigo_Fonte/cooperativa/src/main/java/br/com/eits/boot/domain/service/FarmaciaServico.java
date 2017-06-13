@@ -4,11 +4,15 @@ import org.directwebremoting.annotations.RemoteProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import br.com.eits.boot.domain.entity.Farmacia;
+import br.com.eits.boot.domain.entity.Funcionario;
+import br.com.eits.boot.domain.entity.conta.Usuario;
+import br.com.eits.boot.domain.entity.conta.UsuarioPerfil;
 import br.com.eits.boot.domain.repository.IFarmaciaRepositorio;
 import br.com.eits.common.application.i18n.MessageSourceHolder;
 
@@ -40,20 +44,44 @@ public class FarmaciaServico
 	 * @param user
 	 * @return
 	 */
-	public Farmacia inserirFarmacia( Farmacia farmacia )
+	public Farmacia salvarFarmacia( Farmacia farmacia )
 	{
-		farmacia.setAtivo( false );
-		
 		return this.farmaciaRepositorio.save( farmacia );
 	}
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@PreAuthorize("hasAnyAuthority('"+UsuarioPerfil.ADMINISTRADOR_VALOR+"','"+UsuarioPerfil.COMERCIAL_VALOR+"')")
+	public Farmacia removerFarmacia( long id )
+	{
+		final Farmacia farmacia = this.farmaciaRepositorio.findOne( id );
+		farmacia.setAtivo( false );
+		farmacia.setExcluido( true );
 	
+		return this.farmaciaRepositorio.save( farmacia );
+	}
+
+	/**
+	 * 
+	 */
+	public Farmacia getInstancia()
+	{
+		final Farmacia farmacia = new Farmacia();
+		farmacia.setAtivo( false );
+		farmacia.setExcluido( false );
+	
+		return farmacia;
+	}
+		
 	/**
 	 * 
 	 * @param id
 	 * @return
 	 */
 	@Transactional(readOnly=true)
-	public Farmacia buscarFarmaciaoPorId( long id )
+	public Farmacia buscarFarmaciaPorId( long id )
 	{
 		final Farmacia farmacia = this.farmaciaRepositorio.findOne( id );
 		Assert.notNull( farmacia, MessageSourceHolder.getMessage("repository.notFoundById", id) );
@@ -67,11 +95,23 @@ public class FarmaciaServico
 	 * @return
 	 */
 	@Transactional(readOnly=true)
-	public Page<Farmacia> buscarUsuariosPorFiltros( String filter, PageRequest pageable )
+	public Page<Farmacia> buscarFarmaciasPorFiltros( String filter, PageRequest pageable )
 	{
 		return this.farmaciaRepositorio.listByFilters( filter, pageable );
 	}
 
+	/**
+	 * 
+	 * @param pageable
+	 * @param filter
+	 * @return
+	 */
+	@Transactional(readOnly=true)
+	public Page<Farmacia> buscarFarmaciasExcluidas( String filter, PageRequest pageable )
+	{
+		return this.farmaciaRepositorio.listarPorExcluido( filter, pageable );
+	}
+	
 	/**
 	 * 
 	 * @param pageable

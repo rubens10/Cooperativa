@@ -4,11 +4,15 @@ import org.directwebremoting.annotations.RemoteProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import br.com.eits.boot.domain.entity.Associado;
+import br.com.eits.boot.domain.entity.Funcionario;
+import br.com.eits.boot.domain.entity.conta.Usuario;
+import br.com.eits.boot.domain.entity.conta.UsuarioPerfil;
 import br.com.eits.boot.domain.repository.IAssociadoRepositorio;
 import br.com.eits.common.application.i18n.MessageSourceHolder;
 
@@ -40,10 +44,8 @@ public class AssociadoServico
 	 * @param user
 	 * @return
 	 */
-	public Associado inserirAssociado( Associado associado )
+	public Associado salvarAssociado( Associado associado )
 	{
-		associado.setAtivo( false );
-		
 		return this.associadoRepositorio.save( associado );
 	}
 	
@@ -52,8 +54,35 @@ public class AssociadoServico
 	 * @param id
 	 * @return
 	 */
+	@PreAuthorize("hasAnyAuthority('"+UsuarioPerfil.ADMINISTRADOR_VALOR+"','"+UsuarioPerfil.COMERCIAL_VALOR+"')")
+	public Associado removerAssociado( long id )
+	{
+		final Associado associado = this.associadoRepositorio.findOne( id );
+		associado.setAtivo( false );
+		associado.setExcluido( true );
+	
+		return this.associadoRepositorio.save( associado );
+	}
+
+	/**
+	 * 
+	 */
+	public Associado getInstancia()
+	{
+		final Associado associado = new Associado();
+		associado.setAtivo( false );
+		associado.setExcluido( false );
+	
+		return associado;
+	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@Transactional(readOnly=true)
-	public Associado buscarAssociadooPorId( long id )
+	public Associado buscarAssociadoPorId( long id )
 	{
 		final Associado associado = this.associadoRepositorio.findOne( id );
 		Assert.notNull( associado, MessageSourceHolder.getMessage("repository.notFoundById", id) );
@@ -67,11 +96,23 @@ public class AssociadoServico
 	 * @return
 	 */
 	@Transactional(readOnly=true)
-	public Page<Associado> buscarUsuariosPorFiltros( String filter, PageRequest pageable )
+	public Page<Associado> buscarAssociadosPorFiltros( String filter, PageRequest pageable )
 	{
 		return this.associadoRepositorio.listByFilters( filter, pageable );
 	}
 
+	/**
+	 * 
+	 * @param pageable
+	 * @param filter
+	 * @return
+	 */
+	@Transactional(readOnly=true)
+	public Page<Associado> buscarAssociadosExcluidos( String filter, PageRequest pageable )
+	{
+		return this.associadoRepositorio.listarPorExcluido( filter, pageable );
+	}
+	
 	/**
 	 * 
 	 * @param pageable

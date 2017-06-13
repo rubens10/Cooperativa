@@ -24,4 +24,13 @@ public interface IFuncionarioRepositorio extends JpaRepository<Funcionario, Long
 				  "WHERE ( FILTER(funcionario.id, :filter) = TRUE "
 				  	 + "OR FILTER(funcionario.nome, :filter) = TRUE )" )
 	public Page<Funcionario> listByFilters( @Param("filter") String filter, Pageable pageable );
+
+	/**
+	 * @param filter
+	 * @param pageable
+	 * @return
+	 */
+	@Query(value="FROM Funcionario funcionario " +
+				  "WHERE (	 FILTER(funcionario.excluido, :filter) = TRUE )" )
+	public Page<Funcionario> listarPorExcluido( @Param("filter") String filter, Pageable pageable );
 }

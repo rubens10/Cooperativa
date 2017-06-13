@@ -32,7 +32,7 @@ public class FarmaciaTestes extends AbstractUnitTests
 		
 		Assert.assertNotNull( farmacia.getRazaoSocial() );
 		Assert.assertNotNull( farmacia.getNomeFantasia() );
-		Assert.assertTrue( farmacia.isAtivo() );
+		Assert.assertTrue( farmacia.getAtivo() );
 	}
 	/**
      * 
@@ -47,7 +47,7 @@ public class FarmaciaTestes extends AbstractUnitTests
 		
 		Assert.assertNotNull( farmacia.getRazaoSocial() );
 		Assert.assertNotNull( farmacia.getNomeFantasia() );
-		Assert.assertFalse( farmacia.isAtivo() );
+		Assert.assertFalse( farmacia.getAtivo() );
 	}
 	/**
      * 
@@ -62,6 +62,6 @@ public class FarmaciaTestes extends AbstractUnitTests
 		
 		Assert.assertNotNull( farmacia.getRazaoSocial() );
 		Assert.assertNotNull( farmacia.getNomeFantasia() );
-		Assert.assertTrue( farmacia.isAtivo() );
+		Assert.assertTrue( farmacia.getAtivo() );
 	}
 }

@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import br.com.eits.boot.domain.entity.Farmacia;
+import br.com.eits.boot.domain.entity.conta.Usuario;
 
 /**
  * 
@@ -29,4 +30,13 @@ public interface IFarmaciaRepositorio extends JpaRepository<Farmacia, Long>
 				  	 + "OR FILTER(farmacia.nome_fantasia, :filter) = TRUE )" )*/
 	
 	public Page<Farmacia> listByFilters( @Param("filter") String filter, Pageable pageable );
+
+	/**
+	 * @param filter
+	 * @param pageable
+	 * @return
+	 */
+	@Query(value="FROM Farmacia farmacia " +
+				  "WHERE ( FILTER(farmacia.excluido, :filter) = TRUE )" )
+	public Page<Farmacia> listarPorExcluido( @Param("filter") String filter, Pageable pageable );
 }

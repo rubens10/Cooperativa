@@ -8,9 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
@@ -19,7 +16,6 @@ import org.directwebremoting.annotations.DataTransferObject;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -33,10 +29,9 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @Entity
-@Table(name = "\"usuario\"")
 @EqualsAndHashCode(callSuper=true)
 @DataTransferObject(javascript = "Usuario")
-public class Usuario extends AbstractEntity implements Serializable
+public class Usuario extends AbstractEntity implements Serializable, UserDetails
 {
 	/**
 	 * 
@@ -59,7 +54,7 @@ public class Usuario extends AbstractEntity implements Serializable
 	 */
 	@NotBlank
 	@Length(min = 8)
-	@Column(name = "senha", nullable = false, length = 20)
+	@Column(name = "senha", nullable = false, length = 100)
 	private String senha;
 	/**
 	 * 
@@ -74,6 +69,12 @@ public class Usuario extends AbstractEntity implements Serializable
 	@NotNull
 	@Column(name = "ativo", nullable = false)
 	private Boolean ativo;
+	/**
+	 * 
+	 */
+	@NotNull
+	@Column(name = "excluido", nullable = false)
+	private Boolean excluido;
 
 	/*-------------------------------------------------------------------
 	 * 		 					CONSTRUCTORS
@@ -101,14 +102,16 @@ public class Usuario extends AbstractEntity implements Serializable
 	 * @param senha
 	 * @param ativo
 	 * @param perfil
+	 * @param excluido
 	 */
-	public Usuario( Long id, String email, String senha, Boolean ativo, UsuarioPerfil perfil )
+	public Usuario( Long id, String email, String senha, Boolean ativo, UsuarioPerfil perfil, Boolean excluido)
 	{
 		super( id );
 		this.email = email;
 		this.ativo = ativo;
 		this.senha = senha;
 		this.perfil = perfil;
+		this.excluido = excluido;
 	}
 
 	/*-------------------------------------------------------------------
@@ -133,50 +136,60 @@ public class Usuario extends AbstractEntity implements Serializable
 	}
 
 	
-	/**
-	 * 
-	 */
-	public boolean isAtivo()
-	{
-		return !this.ativo;
-	}
+	
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * org.springframework.security.core.userdetails.UserDetails#getPassword()
-	 
-	@Override*/
-	public String getSenha()
+	/* (non-Javadoc)
+	 * @see org.springframework.security.core.userdetails.UserDetails#getPassword()
+	 */
+	@Override
+	public String getPassword()
 	{
 		return this.senha;
 	}
-	
-	@Transient
-	public Long getId()
-	{
-		return this.id;
-	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * org.springframework.security.core.userdetails.UserDetails#getUsername()
-	@Override*/
-	@Transient
-	public String getEmail()
+	/* (non-Javadoc)
+	 * @see org.springframework.security.core.userdetails.UserDetails#getUsername()
+	 */
+	@Override
+	public String getUsername()
 	{
 		return this.email;
 	}
 
-	public void setEmail(String email)
+	/* (non-Javadoc)
+	 * @see org.springframework.security.core.userdetails.UserDetails#isAccountNonExpired()
+	 */
+	@Override
+	public boolean isAccountNonExpired()
 	{
-		this.email = email;
+		return true;
 	}
-	
-	public void setSenha(String senha)
+
+	/* (non-Javadoc)
+	 * @see org.springframework.security.core.userdetails.UserDetails#isAccountNonLocked()
+	 */
+	@Override
+	public boolean isAccountNonLocked()
 	{
-		this.senha = senha;
+		return true;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.springframework.security.core.userdetails.UserDetails#isCredentialsNonExpired()
+	 */
+	@Override
+	public boolean isCredentialsNonExpired()
+	{
+		return true;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.springframework.security.core.userdetails.UserDetails#isEnabled()
+	 */
+	@Override
+	public boolean isEnabled()
+	{
+		return this.ativo;
 	}
 	
 	/*-------------------------------------------------------------------

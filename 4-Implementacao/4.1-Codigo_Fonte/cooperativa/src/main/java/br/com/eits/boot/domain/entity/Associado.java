@@ -13,6 +13,7 @@ import org.directwebremoting.annotations.DataTransferObject;
 import org.hibernate.annotations.Type;
 //import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.br.CPF;
 
 import br.com.eits.common.domain.entity.AbstractEntity;
 import lombok.Data;
@@ -50,20 +51,21 @@ public class Associado extends AbstractEntity implements Serializable
 	 */
 	@NotNull
 	@NotBlank
-	@Column(name = "rg", nullable = false, length = 15)
+	@Column(name = "rg", nullable = false, length = 20)
 	private String rg;
 	/**
 	 * 
 	 */
 	@NotNull
 	@NotBlank
+	@CPF(message="CPF inválido")
 	@Column(name = "cpf", nullable = false, length = 11)
 	private String cpf;
 	/**
 	 * 
 	 */
 	@Column(name = "data_nascimento")
-	@Type(type="date")
+	/*@Type(type="date")*/
 	private Calendar dataNascimento;
 	/**
 	 * 
@@ -104,14 +106,14 @@ public class Associado extends AbstractEntity implements Serializable
 	 * 
 	 */
 	@NotNull
-	@Column(name = "data_cadastro", nullable = false, length = 20)
-	private Calendar dataCadastro;
+	@Column(name = "ativo", nullable = false)
+	private Boolean ativo;
 	/**
 	 * 
 	 */
 	@NotNull
-	@Column(name = "ativo", nullable = false)
-	private Boolean ativo;
+	@Column(name = "excluido", nullable = false)
+	private Boolean excluido;
 
 	/*-------------------------------------------------------------------
 	 * 		 					CONSTRUCTORS
@@ -147,9 +149,10 @@ public class Associado extends AbstractEntity implements Serializable
 	 * @param bairro
 	 * @param complemento
 	 * @param dataCadastro
-	 * @param ativo;
+	 * @param ativo
+	 * @param excluido
 	 */
-	public Associado( Long id, String nome, String rg, String cpf, Calendar dataNascimento, String telefone, String celular, String cep, String logradouro, String numero, String bairro, String complemento, Calendar dataCadastro, Boolean ativo)
+	public Associado( Long id, String nome, String rg, String cpf, Calendar dataNascimento, String telefone, String celular, String cep, String logradouro, String numero, String bairro, String complemento, Boolean ativo, Boolean excluido)
 	{
 		super( id );
 		this.nome = nome;
@@ -163,20 +166,13 @@ public class Associado extends AbstractEntity implements Serializable
 		this.numero = numero;
 		this.bairro = bairro;
 		this.complemento = complemento;
-		this.dataCadastro = dataCadastro;
 		this.ativo = ativo;
+		this.excluido = excluido;
 	}
 
 	/*-------------------------------------------------------------------
 	 *							BEHAVIORS
 	 *-------------------------------------------------------------------*/
-	/**
-	 * 
-	 */
-	@Transient
-	public boolean isAtivo()
-	{
-		return this.ativo;
-	}
+	
 
 }

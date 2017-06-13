@@ -30,7 +30,7 @@ public class AssociadoTestes extends AbstractUnitTests
 		associado.setAtivo(true);
 		
 		Assert.assertNotNull( associado.getNome() );
-		Assert.assertTrue( associado.isAtivo() );
+		Assert.assertTrue( associado.getAtivo() );
 	}
 	/**
      * 
@@ -43,7 +43,7 @@ public class AssociadoTestes extends AbstractUnitTests
 		associado.setAtivo(false);
 		
 		Assert.assertNotNull( associado.getNome() );
-		Assert.assertFalse( associado.isAtivo() );
+		Assert.assertFalse( associado.getAtivo() );
 	}
 	/**
      * 
@@ -56,6 +56,6 @@ public class AssociadoTestes extends AbstractUnitTests
 		associado.setAtivo(true);
 		
 		Assert.assertNotNull( associado.getNome() );
-		Assert.assertTrue( associado.isAtivo() );
+		Assert.assertTrue( associado.getAtivo() );
 	}
 }

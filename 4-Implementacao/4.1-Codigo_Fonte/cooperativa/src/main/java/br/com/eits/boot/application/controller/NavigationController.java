@@ -19,17 +19,27 @@ public class NavigationController
 	 * @return
 	 */
 	@RequestMapping("/")
-	public ModelAndView home()
+	public ModelAndView centralAssociado()
 	{
-		return new ModelAndView( "modules/home/index" );
+		return new ModelAndView( "modules/central-associado/index" );
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	@RequestMapping("/administrativo")
+	public ModelAndView administrativo()
+	{
+		return new ModelAndView( "modules/administrativo/index" );
 	}
 
 	/**
 	 * 
 	 */
-	@RequestMapping(value = "/authentication")
-	public ModelAndView authentication()
+	@RequestMapping(value = "/autenticacao")
+	public ModelAndView autenticacao()
 	{
-		return new ModelAndView( "modules/authentication/index" );
+		return new ModelAndView( "modules/autenticacao/index" );
 	}
 }

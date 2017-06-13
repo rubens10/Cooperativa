@@ -1,0 +1,50 @@
+<!--<h2>Listagem de Farmacia</h2>-->
+<!--<button (click)="onBuscarFarmaciaById()">Buscar Por Id</button>-->
+
+<md-card>
+  <md-toolbar>
+        <div class="md-toolbar-tools">
+          <button routerLink="/farmacia-formulario" md-button color="accent" class="text-upper">Cadastrar</button>
+        </div>
+  </md-toolbar>
+
+  <div layout="row" layout-align="start center" class="pad-left-sm pad-right-sm">
+    <span *ngIf="!searchBox.searchVisible" class="push-left-sm">
+      <span class="md-title">Listagem de Farmácias</span>
+    </span>
+    <td-search-box #searchBox backIcon="arrow_back" class="push-right-sm" placeholder="Buscar" (searchDebounce)="onBuscar($event)" flex>
+    </td-search-box>
+  </div>
+
+  <md-divider></md-divider>
+  <br>
+
+  <md-list class="pull-top">
+    <md-list-item>
+      <!--<md-icon md-list-avatar>apps</md-icon>-->
+      <h3 md-line>Farmácia</h3>
+      <span flex></span>
+      <span flex="30" class="pad-left md-body-1 tc-grey-500">
+        <h3 md-line>CNPJ</h3>
+      </span>
+      <span flex="30" class="md-body-1 tc-grey-500">
+        <h3 md-line>Modificado em</h3>
+      </span>
+    </md-list-item>
+
+    <md-divider></md-divider>
+
+    <ng-template let-item="$implicit" let-i="index" let-last="last" ngFor [ngForOf]="farmacias">
+      <a md-list-item routerLink="/farmacia-formulario/{{farmacias[i].id}}" style="text-decoration:none">
+        <!--<md-icon md-list-avatar>people</md-icon>-->
+        <h3 md-line>{{farmacias[i].nomeFantasia}}</h3>
+        <p md-line></p>
+        <span flex></span>
+        <span flex="30" class="md-body-1 tc-grey-500">{{farmacias[i].cnpj}}</span>
+        <span flex="30" class="md-body-1 tc-grey-500">{{farmacias[i].updated}}</span>
+      </a>
+      <md-divider *ngIf="!last"></md-divider>
+    </ng-template>
+  </md-list>
+
+</md-card>

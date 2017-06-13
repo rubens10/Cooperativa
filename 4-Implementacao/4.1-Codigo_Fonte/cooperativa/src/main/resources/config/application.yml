@@ -15,7 +15,7 @@ spring:
 
 #JPA
   jpa:
-    hibernate.ddl-auto: validate
+    hibernate.ddl-auto: update
     show-sql: true
     open-in-view: false
     properties:
@@ -60,7 +60,7 @@ spring:
 #LOGGING
 logging.level:
   org.hibernate: INFO
-  org.directwebremoting: INFO
+  org.directwebremoting: DEBUG
   org.springframework.web: INFO
   org.springframework.context.support: INFO
   org.springframework.security: INFO

@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="UsuarioServicoTestesIntegracao" project="cooperativa" tests="7" started="7" failures="0" errors="6" ignored="0">
+  <testsuite name="br.com.eits.boot.test.domain.service.UsuarioServicoTestesIntegracao" time="0.513">
+    <testcase name="listUsersByFiltersDeveRetornarTodos" classname="br.com.eits.boot.test.domain.service.UsuarioServicoTestesIntegracao" time="0.174">
+      <error>org.springframework.jdbc.datasource.init.ScriptStatementFailedException: Failed to execute SQL script statement #10 of class path resource [dataset/usuarios.sql]: INSERT INTO "usuario" (id, created, ativo, email, senha, perfil) VALUES ( 9999, NOW(), true, 'admin@email.com', 'd1bd2f08fead38a982aed9d4ca060152400b1b8f', 0); nested exception is org.postgresql.util.PSQLException: ERROR: null value in column "excluido" violates not-null constraint
+  Detalhe: Failing row contains (9999, 2017-06-12 17:09:49.349466, null, t, admin@email.com, null, 0, d1bd2f08fead38a982aed9d4ca060152400b1b8f).&#13;
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:492)&#13;
+	at org.springframework.jdbc.datasource.init.ResourceDatabasePopulator.populate(ResourceDatabasePopulator.java:238)&#13;
+	at org.springframework.jdbc.datasource.init.DatabasePopulatorUtils.execute(DatabasePopulatorUtils.java:48)&#13;
+	at org.springframework.jdbc.datasource.init.ResourceDatabasePopulator.execute(ResourceDatabasePopulator.java:253)&#13;
+	at org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener$1.doInTransactionWithoutResult(SqlScriptsTestExecutionListener.java:237)&#13;
+	at org.springframework.transaction.support.TransactionCallbackWithoutResult.doInTransaction(TransactionCallbackWithoutResult.java:34)&#13;
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:133)&#13;
+	at org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener.executeSqlScripts(SqlScriptsTestExecutionListener.java:234)&#13;
+	at org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener.executeSqlScripts(SqlScriptsTestExecutionListener.java:142)&#13;
+	at org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener.beforeTestMethod(SqlScriptsTestExecutionListener.java:112)&#13;
+	at org.springframework.test.context.TestContextManager.beforeTestMethod(TestContextManager.java:269)&#13;
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:74)&#13;
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:86)&#13;
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:84)&#13;
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)&#13;
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:252)&#13;
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:94)&#13;
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)&#13;
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)&#13;
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)&#13;
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)&#13;
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)&#13;
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)&#13;
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)&#13;
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)&#13;
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:191)&#13;
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)&#13;
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:678)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)&#13;
+Caused by: org.postgresql.util.PSQLException: ERROR: null value in column "excluido" violates not-null constraint
+  Detalhe: Failing row contains (9999, 2017-06-12 17:09:49.349466, null, t, admin@email.com, null, 0, d1bd2f08fead38a982aed9d4ca060152400b1b8f).&#13;
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2455)&#13;
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2155)&#13;
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:288)&#13;
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:430)&#13;
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:356)&#13;
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:303)&#13;
+	at org.postgresql.jdbc.PgStatement.executeCachedSql(PgStatement.java:289)&#13;
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:266)&#13;
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:262)&#13;
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:95)&#13;
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)&#13;
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:471)&#13;
+	... 31 more&#13;
+&#13;
+</error>
+    </testcase>
+    <testcase name="buscarUsuarioPorIdDevePassar" classname="br.com.eits.boot.test.domain.service.UsuarioServicoTestesIntegracao" time="0.099">
+      <error>org.springframework.jdbc.datasource.init.ScriptStatementFailedException: Failed to execute SQL script statement #10 of class path resource [dataset/usuarios.sql]: INSERT INTO "usuario" (id, created, ativo, email, senha, perfil) VALUES ( 9999, NOW(), true, 'admin@email.com', 'd1bd2f08fead38a982aed9d4ca060152400b1b8f', 0); nested exception is org.postgresql.util.PSQLException: ERROR: null value in column "excluido" violates not-null constraint
+  Detalhe: Failing row contains (9999, 2017-06-12 17:09:49.515984, null, t, admin@email.com, null, 0, d1bd2f08fead38a982aed9d4ca060152400b1b8f).&#13;
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:492)&#13;
+	at org.springframework.jdbc.datasource.init.ResourceDatabasePopulator.populate(ResourceDatabasePopulator.java:238)&#13;
+	at org.springframework.jdbc.datasource.init.DatabasePopulatorUtils.execute(DatabasePopulatorUtils.java:48)&#13;
+	at org.springframework.jdbc.datasource.init.ResourceDatabasePopulator.execute(ResourceDatabasePopulator.java:253)&#13;
+	at org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener$1.doInTransactionWithoutResult(SqlScriptsTestExecutionListener.java:237)&#13;
+	at org.springframework.transaction.support.TransactionCallbackWithoutResult.doInTransaction(TransactionCallbackWithoutResult.java:34)&#13;
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:133)&#13;
+	at org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener.executeSqlScripts(SqlScriptsTestExecutionListener.java:234)&#13;
+	at org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener.executeSqlScripts(SqlScriptsTestExecutionListener.java:142)&#13;
+	at org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener.beforeTestMethod(SqlScriptsTestExecutionListener.java:112)&#13;
+	at org.springframework.test.context.TestContextManager.beforeTestMethod(TestContextManager.java:269)&#13;
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:74)&#13;
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:86)&#13;
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:84)&#13;
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)&#13;
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:252)&#13;
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:94)&#13;
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)&#13;
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)&#13;
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)&#13;
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)&#13;
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)&#13;
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)&#13;
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)&#13;
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)&#13;
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:191)&#13;
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)&#13;
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:678)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)&#13;
+Caused by: org.postgresql.util.PSQLException: ERROR: null value in column "excluido" violates not-null constraint
+  Detalhe: Failing row contains (9999, 2017-06-12 17:09:49.515984, null, t, admin@email.com, null, 0, d1bd2f08fead38a982aed9d4ca060152400b1b8f).&#13;
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2455)&#13;
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2155)&#13;
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:288)&#13;
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:430)&#13;
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:356)&#13;
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:303)&#13;
+	at org.postgresql.jdbc.PgStatement.executeCachedSql(PgStatement.java:289)&#13;
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:266)&#13;
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:262)&#13;
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:95)&#13;
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)&#13;
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:471)&#13;
+	... 31 more&#13;
+&#13;
+</error>
+    </testcase>
+    <testcase name="insertUserMustFail" classname="br.com.eits.boot.test.domain.service.UsuarioServicoTestesIntegracao" time="0.015"/>
+    <testcase name="inserirUsuarioDevePassar" classname="br.com.eits.boot.test.domain.service.UsuarioServicoTestesIntegracao" time="0.04">
+      <error>org.springframework.jdbc.datasource.init.ScriptStatementFailedException: Failed to execute SQL script statement #10 of class path resource [dataset/usuarios.sql]: INSERT INTO "usuario" (id, created, ativo, email, senha, perfil) VALUES ( 9999, NOW(), true, 'admin@email.com', 'd1bd2f08fead38a982aed9d4ca060152400b1b8f', 0); nested exception is org.postgresql.util.PSQLException: ERROR: null value in column "excluido" violates not-null constraint
+  Detalhe: Failing row contains (9999, 2017-06-12 17:09:49.642499, null, t, admin@email.com, null, 0, d1bd2f08fead38a982aed9d4ca060152400b1b8f).&#13;
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:492)&#13;
+	at org.springframework.jdbc.datasource.init.ResourceDatabasePopulator.populate(ResourceDatabasePopulator.java:238)&#13;
+	at org.springframework.jdbc.datasource.init.DatabasePopulatorUtils.execute(DatabasePopulatorUtils.java:48)&#13;
+	at org.springframework.jdbc.datasource.init.ResourceDatabasePopulator.execute(ResourceDatabasePopulator.java:253)&#13;
+	at org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener$1.doInTransactionWithoutResult(SqlScriptsTestExecutionListener.java:237)&#13;
+	at org.springframework.transaction.support.TransactionCallbackWithoutResult.doInTransaction(TransactionCallbackWithoutResult.java:34)&#13;
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:133)&#13;
+	at org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener.executeSqlScripts(SqlScriptsTestExecutionListener.java:234)&#13;
+	at org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener.executeSqlScripts(SqlScriptsTestExecutionListener.java:142)&#13;
+	at org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener.beforeTestMethod(SqlScriptsTestExecutionListener.java:112)&#13;
+	at org.springframework.test.context.TestContextManager.beforeTestMethod(TestContextManager.java:269)&#13;
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:74)&#13;
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:86)&#13;
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:84)&#13;
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)&#13;
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:252)&#13;
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:94)&#13;
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)&#13;
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)&#13;
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)&#13;
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)&#13;
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)&#13;
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)&#13;
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)&#13;
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)&#13;
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:191)&#13;
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)&#13;
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:678)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)&#13;
+Caused by: org.postgresql.util.PSQLException: ERROR: null value in column "excluido" violates not-null constraint
+  Detalhe: Failing row contains (9999, 2017-06-12 17:09:49.642499, null, t, admin@email.com, null, 0, d1bd2f08fead38a982aed9d4ca060152400b1b8f).&#13;
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2455)&#13;
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2155)&#13;
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:288)&#13;
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:430)&#13;
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:356)&#13;
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:303)&#13;
+	at org.postgresql.jdbc.PgStatement.executeCachedSql(PgStatement.java:289)&#13;
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:266)&#13;
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:262)&#13;
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:95)&#13;
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)&#13;
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:471)&#13;
+	... 31 more&#13;
+&#13;
+</error>
+    </testcase>
+    <testcase name="listarUsuariosPorFiltrosDeveRetornar1" classname="br.com.eits.boot.test.domain.service.UsuarioServicoTestesIntegracao" time="0.07">
+      <error>org.springframework.jdbc.datasource.init.ScriptStatementFailedException: Failed to execute SQL script statement #10 of class path resource [dataset/usuarios.sql]: INSERT INTO "usuario" (id, created, ativo, email, senha, perfil) VALUES ( 9999, NOW(), true, 'admin@email.com', 'd1bd2f08fead38a982aed9d4ca060152400b1b8f', 0); nested exception is org.postgresql.util.PSQLException: ERROR: null value in column "excluido" violates not-null constraint
+  Detalhe: Failing row contains (9999, 2017-06-12 17:09:49.678503, null, t, admin@email.com, null, 0, d1bd2f08fead38a982aed9d4ca060152400b1b8f).&#13;
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:492)&#13;
+	at org.springframework.jdbc.datasource.init.ResourceDatabasePopulator.populate(ResourceDatabasePopulator.java:238)&#13;
+	at org.springframework.jdbc.datasource.init.DatabasePopulatorUtils.execute(DatabasePopulatorUtils.java:48)&#13;
+	at org.springframework.jdbc.datasource.init.ResourceDatabasePopulator.execute(ResourceDatabasePopulator.java:253)&#13;
+	at org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener$1.doInTransactionWithoutResult(SqlScriptsTestExecutionListener.java:237)&#13;
+	at org.springframework.transaction.support.TransactionCallbackWithoutResult.doInTransaction(TransactionCallbackWithoutResult.java:34)&#13;
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:133)&#13;
+	at org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener.executeSqlScripts(SqlScriptsTestExecutionListener.java:234)&#13;
+	at org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener.executeSqlScripts(SqlScriptsTestExecutionListener.java:142)&#13;
+	at org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener.beforeTestMethod(SqlScriptsTestExecutionListener.java:112)&#13;
+	at org.springframework.test.context.TestContextManager.beforeTestMethod(TestContextManager.java:269)&#13;
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:74)&#13;
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:86)&#13;
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:84)&#13;
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)&#13;
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:252)&#13;
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:94)&#13;
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)&#13;
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)&#13;
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)&#13;
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)&#13;
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)&#13;
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)&#13;
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)&#13;
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)&#13;
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:191)&#13;
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)&#13;
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:678)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)&#13;
+Caused by: org.postgresql.util.PSQLException: ERROR: null value in column "excluido" violates not-null constraint
+  Detalhe: Failing row contains (9999, 2017-06-12 17:09:49.678503, null, t, admin@email.com, null, 0, d1bd2f08fead38a982aed9d4ca060152400b1b8f).&#13;
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2455)&#13;
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2155)&#13;
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:288)&#13;
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:430)&#13;
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:356)&#13;
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:303)&#13;
+	at org.postgresql.jdbc.PgStatement.executeCachedSql(PgStatement.java:289)&#13;
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:266)&#13;
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:262)&#13;
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:95)&#13;
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)&#13;
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:471)&#13;
+	... 31 more&#13;
+&#13;
+</error>
+    </testcase>
+    <testcase name="listarUsuariosPorFiltrosDeveRetornar2" classname="br.com.eits.boot.test.domain.service.UsuarioServicoTestesIntegracao" time="0.079">
+      <error>org.springframework.jdbc.datasource.init.ScriptStatementFailedException: Failed to execute SQL script statement #10 of class path resource [dataset/usuarios.sql]: INSERT INTO "usuario" (id, created, ativo, email, senha, perfil) VALUES ( 9999, NOW(), true, 'admin@email.com', 'd1bd2f08fead38a982aed9d4ca060152400b1b8f', 0); nested exception is org.postgresql.util.PSQLException: ERROR: null value in column "excluido" violates not-null constraint
+  Detalhe: Failing row contains (9999, 2017-06-12 17:09:49.748011, null, t, admin@email.com, null, 0, d1bd2f08fead38a982aed9d4ca060152400b1b8f).&#13;
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:492)&#13;
+	at org.springframework.jdbc.datasource.init.ResourceDatabasePopulator.populate(ResourceDatabasePopulator.java:238)&#13;
+	at org.springframework.jdbc.datasource.init.DatabasePopulatorUtils.execute(DatabasePopulatorUtils.java:48)&#13;
+	at org.springframework.jdbc.datasource.init.ResourceDatabasePopulator.execute(ResourceDatabasePopulator.java:253)&#13;
+	at org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener$1.doInTransactionWithoutResult(SqlScriptsTestExecutionListener.java:237)&#13;
+	at org.springframework.transaction.support.TransactionCallbackWithoutResult.doInTransaction(TransactionCallbackWithoutResult.java:34)&#13;
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:133)&#13;
+	at org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener.executeSqlScripts(SqlScriptsTestExecutionListener.java:234)&#13;
+	at org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener.executeSqlScripts(SqlScriptsTestExecutionListener.java:142)&#13;
+	at org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener.beforeTestMethod(SqlScriptsTestExecutionListener.java:112)&#13;
+	at org.springframework.test.context.TestContextManager.beforeTestMethod(TestContextManager.java:269)&#13;
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:74)&#13;
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:86)&#13;
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:84)&#13;
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)&#13;
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:252)&#13;
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:94)&#13;
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)&#13;
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)&#13;
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)&#13;
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)&#13;
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)&#13;
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)&#13;
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)&#13;
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)&#13;
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:191)&#13;
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)&#13;
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:678)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)&#13;
+Caused by: org.postgresql.util.PSQLException: ERROR: null value in column "excluido" violates not-null constraint
+  Detalhe: Failing row contains (9999, 2017-06-12 17:09:49.748011, null, t, admin@email.com, null, 0, d1bd2f08fead38a982aed9d4ca060152400b1b8f).&#13;
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2455)&#13;
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2155)&#13;
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:288)&#13;
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:430)&#13;
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:356)&#13;
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:303)&#13;
+	at org.postgresql.jdbc.PgStatement.executeCachedSql(PgStatement.java:289)&#13;
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:266)&#13;
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:262)&#13;
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:95)&#13;
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)&#13;
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:471)&#13;
+	... 31 more&#13;
+&#13;
+</error>
+    </testcase>
+    <testcase name="listarUsuariosPorFiltrosDeveRetornar3" classname="br.com.eits.boot.test.domain.service.UsuarioServicoTestesIntegracao" time="0.027">
+      <error>org.springframework.jdbc.datasource.init.ScriptStatementFailedException: Failed to execute SQL script statement #10 of class path resource [dataset/usuarios.sql]: INSERT INTO "usuario" (id, created, ativo, email, senha, perfil) VALUES ( 9999, NOW(), true, 'admin@email.com', 'd1bd2f08fead38a982aed9d4ca060152400b1b8f', 0); nested exception is org.postgresql.util.PSQLException: ERROR: null value in column "excluido" violates not-null constraint
+  Detalhe: Failing row contains (9999, 2017-06-12 17:09:49.826021, null, t, admin@email.com, null, 0, d1bd2f08fead38a982aed9d4ca060152400b1b8f).&#13;
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:492)&#13;
+	at org.springframework.jdbc.datasource.init.ResourceDatabasePopulator.populate(ResourceDatabasePopulator.java:238)&#13;
+	at org.springframework.jdbc.datasource.init.DatabasePopulatorUtils.execute(DatabasePopulatorUtils.java:48)&#13;
+	at org.springframework.jdbc.datasource.init.ResourceDatabasePopulator.execute(ResourceDatabasePopulator.java:253)&#13;
+	at org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener$1.doInTransactionWithoutResult(SqlScriptsTestExecutionListener.java:237)&#13;
+	at org.springframework.transaction.support.TransactionCallbackWithoutResult.doInTransaction(TransactionCallbackWithoutResult.java:34)&#13;
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:133)&#13;
+	at org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener.executeSqlScripts(SqlScriptsTestExecutionListener.java:234)&#13;
+	at org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener.executeSqlScripts(SqlScriptsTestExecutionListener.java:142)&#13;
+	at org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener.beforeTestMethod(SqlScriptsTestExecutionListener.java:112)&#13;
+	at org.springframework.test.context.TestContextManager.beforeTestMethod(TestContextManager.java:269)&#13;
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:74)&#13;
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:86)&#13;
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:84)&#13;
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)&#13;
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:252)&#13;
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:94)&#13;
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)&#13;
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)&#13;
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)&#13;
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)&#13;
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)&#13;
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)&#13;
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)&#13;
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)&#13;
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:191)&#13;
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)&#13;
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:678)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)&#13;
+Caused by: org.postgresql.util.PSQLException: ERROR: null value in column "excluido" violates not-null constraint
+  Detalhe: Failing row contains (9999, 2017-06-12 17:09:49.826021, null, t, admin@email.com, null, 0, d1bd2f08fead38a982aed9d4ca060152400b1b8f).&#13;
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2455)&#13;
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2155)&#13;
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:288)&#13;
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:430)&#13;
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:356)&#13;
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:303)&#13;
+	at org.postgresql.jdbc.PgStatement.executeCachedSql(PgStatement.java:289)&#13;
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:266)&#13;
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:262)&#13;
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:95)&#13;
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)&#13;
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:471)&#13;
+	... 31 more&#13;
+&#13;
+</error>
+    </testcase>
+  </testsuite>
+</testrun>
