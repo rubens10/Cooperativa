@@ -3,13 +3,13 @@
 	<md-card style="width: 600px">
 		<md-card-title>Autenticação do Usuário</md-card-title>
 	  	<md-card-subtitle>Entre com sua conta corporativa</md-card-subtitle>
-	  	
+
 	  	<md-divider></md-divider>
-	  	
+
 	  	<md-card-content>
 	    	<form #signinForm="ngForm" layout="column" layout-margin>
 		      <md-input-container flex>
-		        <input type="email" mdInput placeholder="Seu email" [(ngModel)]="user.email" required name="email"/>
+		        <input type="email" mdInput placeholder="Seu email" [(ngModel)]="user.email" required name="email" />
 		        <span md-prefix>
 		        	<md-icon>person</md-icon>
 		       	</span>
@@ -22,9 +22,9 @@
 		      </md-input-container>
 	    	</form>
 	  	</md-card-content>
-	  	
+
 	  	<md-divider></md-divider>
-	  	
+
 	  	<md-card-actions>
 	    	<button [disabled]="!signinForm.form.valid" md-raised-button color="primary" (click)="onSignIn()">
 	    		Entrar

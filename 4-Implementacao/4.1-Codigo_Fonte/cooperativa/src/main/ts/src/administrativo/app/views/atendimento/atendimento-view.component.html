@@ -1,0 +1,60 @@
+<md-card>
+  <md-toolbar>
+        <div class="md-toolbar-tools">
+          <button routerLink="/atendimento-formulario" md-button color="accent" class="text-upper">Cadastrar</button>
+        </div>
+  </md-toolbar>
+
+  <div layout="row" layout-align="start center" class="pad-left-sm pad-right-sm">
+    <span *ngIf="!searchBox.searchVisible" class="push-left-sm">
+      <span class="md-title">Listagem de Atendimentos</span>
+    </span>
+    <td-search-box #searchBox backIcon="arrow_back" class="push-right-sm" placeholder="Buscar" (searchDebounce)="onBuscar($event)" flex>
+    </td-search-box>
+  </div>
+
+  <md-divider></md-divider>
+  <br>
+
+  <md-list class="pull-top">
+    <md-list-item>
+      <!--<md-icon md-list-avatar>apps</md-icon>-->
+      <span flex="30" class="pad-left md-body-1 tc-grey-500">
+        <h3 md-line>Associado</h3>
+      </span>
+      <span flex></span>
+      <span flex="30" class="pad-left md-body-1 tc-grey-500">
+        <h3 md-line>Funcionário</h3>
+      </span>
+      <span flex></span>
+      <span flex="30" class="pad-left md-body-1 tc-grey-500">
+        <h3 md-line>Assunto</h3>
+      </span>
+      <span flex></span>
+      <span flex="30" class="pad-left md-body-1 tc-grey-500">
+        <h3 md-line>Situação</h3>
+      </span>
+      <span flex="30" class="md-body-1 tc-grey-500">
+        <h3 md-line>Modificado em</h3>
+      </span>
+    </md-list-item>
+
+    <md-divider></md-divider>
+
+    <ng-template let-item="$implicit" let-i="index" let-last="last" ngFor [ngForOf]="atendimentos">
+      <a md-list-item routerLink="/atendimento-formulario/{{atendimentos[i].id}}" style="text-decoration:none">
+        <span flex="30" class="pad-left md-body-1 tc-grey-500"><h3 md-line>{{atendimentos[i].associado.nome}}</h3></span>
+        <span flex></span>
+        <span flex="30" class="pad-left md-body-1 tc-grey-500">{{atendimentos[i].funcionario.nome}}</span>
+        <span flex></span>
+        <span flex="30" class="pad-left md-body-1 tc-grey-500">{{atendimentos[i].assunto.split("_").join(" ")}}</span>
+        <span flex></span>
+        <span flex="30" class="pad-left md-body-1 tc-grey-500">{{atendimentos[i].situacao.split("_").join(" ")}}</span>
+        <span flex></span>
+        <span flex="30" class="pad-left md-body-1 tc-grey-500">{{atendimentos[i].updated | date:'dd/MM/yyyy HH:mm:ss'}}</span>
+      </a>
+      <md-divider *ngIf="!last"></md-divider>
+    </ng-template>
+  </md-list>
+
+</md-card>

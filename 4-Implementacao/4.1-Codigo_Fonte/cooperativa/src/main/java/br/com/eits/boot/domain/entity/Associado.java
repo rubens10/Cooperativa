@@ -5,6 +5,8 @@ import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
@@ -15,6 +17,7 @@ import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.br.CPF;
 
+import br.com.eits.boot.domain.entity.endereco.Cidade;
 import br.com.eits.common.domain.entity.AbstractEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -58,7 +61,7 @@ public class Associado extends AbstractEntity implements Serializable
 	 */
 	@NotNull
 	@NotBlank
-	@CPF(message="CPF inválido")
+	@CPF(message="CPF informado é inválido")
 	@Column(name = "cpf", nullable = false, length = 11)
 	private String cpf;
 	/**
@@ -70,31 +73,37 @@ public class Associado extends AbstractEntity implements Serializable
 	/**
 	 * 
 	 */
+	@NotNull
 	@Column(name = "telefone", length = 20)
 	private String telefone;
 	/**
 	 * 
 	 */
+	@NotNull
 	@Column(name = "celular", length = 20)
 	private String celular;
 	/**
 	 * 
 	 */
+	@NotNull
 	@Column(name = "cep", length = 8)
 	private String cep;
 	/**
 	 * 
 	 */
+	@NotNull
 	@Column(name = "logradouro", length = 50)
 	private String logradouro;
 	/**
 	 * 
 	 */
+	@NotNull
 	@Column(name = "numero", length = 5)
 	private String numero;
 	/**
 	 * 
 	 */
+	@NotNull
 	@Column(name = "bairro", length = 20)
 	private String bairro;
 	/**
@@ -105,15 +114,15 @@ public class Associado extends AbstractEntity implements Serializable
 	/**
 	 * 
 	 */
-	@NotNull
-	@Column(name = "ativo", nullable = false)
-	private Boolean ativo;
+	@ManyToOne
+	@JoinColumn(name = "cidade_id", nullable = false)
+	private Cidade cidade;
 	/**
 	 * 
 	 */
 	@NotNull
-	@Column(name = "excluido", nullable = false)
-	private Boolean excluido;
+	@Column(name = "ativo", nullable = false)
+	private Boolean ativo;
 
 	/*-------------------------------------------------------------------
 	 * 		 					CONSTRUCTORS
@@ -150,9 +159,8 @@ public class Associado extends AbstractEntity implements Serializable
 	 * @param complemento
 	 * @param dataCadastro
 	 * @param ativo
-	 * @param excluido
 	 */
-	public Associado( Long id, String nome, String rg, String cpf, Calendar dataNascimento, String telefone, String celular, String cep, String logradouro, String numero, String bairro, String complemento, Boolean ativo, Boolean excluido)
+	public Associado( Long id, String nome, String rg, String cpf, Calendar dataNascimento, String telefone, String celular, String cep, String logradouro, String numero, String bairro, String complemento, Boolean ativo)
 	{
 		super( id );
 		this.nome = nome;
@@ -167,7 +175,6 @@ public class Associado extends AbstractEntity implements Serializable
 		this.bairro = bairro;
 		this.complemento = complemento;
 		this.ativo = ativo;
-		this.excluido = excluido;
 	}
 
 	/*-------------------------------------------------------------------

@@ -49,7 +49,19 @@ public class UsuarioServico
 	 * @return
 	 */
 	@PreAuthorize("hasAnyAuthority('"+UsuarioPerfil.ADMINISTRADOR_VALOR+"','"+UsuarioPerfil.COMERCIAL_VALOR+"')")
-	public Usuario salvarUsuario( Usuario usuario )
+	public Usuario inserirUsuario( Usuario usuario )
+	{
+		usuario.setSenha( this.passwordEncoder.encode(usuario.getSenha()) );
+		usuario.setAtivo( true );
+		return this.usuarioRepositorio.save( usuario );
+	}
+	/**
+	 * 
+	 * @param user
+	 * @return
+	 */
+	@PreAuthorize("hasAnyAuthority('"+UsuarioPerfil.ADMINISTRADOR_VALOR+"','"+UsuarioPerfil.COMERCIAL_VALOR+"')")
+	public Usuario alterarUsuario( Usuario usuario )
 	{
 		usuario.setSenha( this.passwordEncoder.encode(usuario.getSenha()) );
 		return this.usuarioRepositorio.save( usuario );
@@ -65,23 +77,9 @@ public class UsuarioServico
 	{
 		final Usuario usuario = this.usuarioRepositorio.findOne( id );
 		usuario.setAtivo( false );
-		usuario.setExcluido( true );
 	
 		return this.usuarioRepositorio.save( usuario );
 	}
-	
-	/**
-	 * 
-	 */
-	public Usuario getInstancia()
-	{
-		final Usuario usuario = new Usuario();
-		//usuario.setAtivo( false );
-		//usuario.setExcluido( false );
-	
-		return usuario;
-	}
-	
 	/**
 	 * 
 	 * @param id
@@ -116,18 +114,6 @@ public class UsuarioServico
 	public Page<Usuario> buscarUsuariosPorFiltros( String filter, PageRequest pageable )
 	{
 		return this.usuarioRepositorio.listByFilters( filter, pageable );
-	}
-
-	/**
-	 * 
-	 * @param pageable
-	 * @param filter
-	 * @return
-	 */
-	@Transactional(readOnly=true)
-	public Page<Usuario> buscarUsuariosExcluidos( String filter, PageRequest pageable )
-	{
-		return this.usuarioRepositorio.listarPorExcluido( filter, pageable );
 	}
 
 	/**

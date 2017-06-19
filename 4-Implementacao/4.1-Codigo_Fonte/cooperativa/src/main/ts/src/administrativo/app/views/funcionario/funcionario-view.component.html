@@ -33,15 +33,15 @@
     </md-list-item>
 
     <md-divider></md-divider>
-    
+
     <ng-template let-item="$implicit" let-i="index" let-last="last" ngFor [ngForOf]="funcionarios">
       <a md-list-item routerLink="/funcionario-formulario/{{funcionarios[i].id}}" style="text-decoration:none">
         <!--<md-icon md-list-avatar>people</md-icon>-->
         <h3 md-line>{{funcionarios[i].nome}}</h3>
         <p md-line></p>
         <span flex></span>
-        <span flex="30" class="md-body-1 tc-grey-500">{{funcionarios[i].cpf}}</span>
-        <span flex="30" class="md-body-1 tc-grey-500">{{funcionarios[i].updated}}</span>
+        <span flex="30" class="pad-left md-body-1 tc-grey-500">{{funcionarios[i].cpf}}</span>
+        <span flex="30" class="md-body-1 tc-grey-500">{{funcionarios[i].updated | date:'dd/MM/yyyy HH:mm:ss'}}</span>
       </a>
       <md-divider *ngIf="!last"></md-divider>
     </ng-template>

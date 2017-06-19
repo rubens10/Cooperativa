@@ -37,8 +37,8 @@
         <h3 md-line>{{associados[i].nome}}</h3>
         <p md-line></p>
         <span flex></span>
-        <span flex="30" class="md-body-1 tc-grey-500">{{associados[i].cpf}}</span>
-        <span flex="30" class="md-body-1 tc-grey-500">{{associados[i].updated}}</span>
+        <span flex="30" class="pad-left md-body-1 tc-grey-500">{{associados[i].cpf}}</span>
+        <span flex="30" class="md-body-1 tc-grey-500">{{associados[i].updated | date:'dd/MM/yyyy HH:mm:ss'}}</span>
       </a>
       <md-divider *ngIf="!last"></md-divider>
     </ng-template>

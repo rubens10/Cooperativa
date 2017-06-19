@@ -42,7 +42,7 @@ public class UsuarioServicoTestesIntegracao extends AbstractIntegrationTests
 	})
 	public void salvarUsuarioDeveFalhar() 
 	{
-		this.usuarioServico.salvarUsuario( new Usuario() );
+		this.usuarioServico.inserirUsuario( new Usuario() );
 		Assert.fail("Deveria retornar erro de acesso negado");
 	}
 	
@@ -56,8 +56,8 @@ public class UsuarioServicoTestesIntegracao extends AbstractIntegrationTests
 	})
 	public void inserirUsuarioDevePassar()
 	{
-		Usuario user = new Usuario( null, "test@user.com", "user", true, UsuarioPerfil.ATENDENTE, false );
-		user = this.usuarioServico.salvarUsuario( user );
+		Usuario user = new Usuario( null, "test@user.com", "user", true, UsuarioPerfil.ATENDENTE );
+		user = this.usuarioServico.inserirUsuario( user );
 
 		Assert.assertNotNull( user );
 		Assert.assertNotNull( user.getId() );

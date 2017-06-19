@@ -10,14 +10,14 @@ SET search_path TO public;
 
 TRUNCATE "usuario" CASCADE;
 
-INSERT INTO "usuario" (id, created, ativo, email, senha, perfil, excluido) 
-     VALUES ( 9999, NOW(), true, 'admin@email.com', 'd1bd2f08fead38a982aed9d4ca060152400b1b8f', 0, false);
+INSERT INTO "usuario" (id, created, ativo, email, senha, perfil) 
+     VALUES ( 9999, NOW(), true, 'admin@email.com', 'd1bd2f08fead38a982aed9d4ca060152400b1b8f', 0);
      
-INSERT INTO "usuario" (id, created, ativo, email, senha, perfil, excluido) 
-     VALUES ( 1000, NOW(), true, 'user001@testing.com', 'd1bd2f08fead38a982aed9d4ca060152400b1b8f', 0, false);
+INSERT INTO "usuario" (id, created, ativo, email, senha, perfil) 
+     VALUES ( 1000, NOW(), true, 'user001@testing.com', 'd1bd2f08fead38a982aed9d4ca060152400b1b8f', 0);
      
-INSERT INTO "usuario" (id, created, ativo, email, senha, perfil, excluido) 
-     VALUES ( 1001, NOW(), true, 'user002@testing.com', 'd1bd2f08fead38a982aed9d4ca060152400b1b8f', 1, false);
+INSERT INTO "usuario" (id, created, ativo, email, senha, perfil) 
+     VALUES ( 1001, NOW(), true, 'user002@testing.com', 'd1bd2f08fead38a982aed9d4ca060152400b1b8f', 1);
      
-INSERT INTO "usuario" (id, created, ativo, email, senha, perfil, excluido) 
-     VALUES ( 1002, NOW(), true, 'abc@testes.com', 'd1bd2f08fead38a982aed9d4ca060152400b1b8f', 2, false);
+INSERT INTO "usuario" (id, created, ativo, email, senha, perfil) 
+     VALUES ( 1002, NOW(), true, 'abc@testes.com', 'd1bd2f08fead38a982aed9d4ca060152400b1b8f', 2);

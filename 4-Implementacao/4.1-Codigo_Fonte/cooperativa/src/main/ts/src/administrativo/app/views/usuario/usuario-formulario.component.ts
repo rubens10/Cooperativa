@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Broker } from 'eits-ng2';
-import { ITdDynamicElementConfig, TdDynamicElement, TdDynamicType } from '@covalent/dynamic-forms';
-import { FormGroup, FormControl/*, FormBuilder, Validators*/ } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TdDialogService } from '@covalent/core';
 import { Subscription } from 'rxjs/Rx';
@@ -23,9 +21,17 @@ export class UsuarioFormulario
      */
     id:any = 0;
     inscricao: Subscription;
-    elements: ITdDynamicElementConfig[];
-    excluirRegistro:Boolean;
+    alterarRegistro:Boolean;
     usuario:any = {};
+    confirmarSenha:any;
+
+    private perfis:Array<any> = [
+       { id: 0, nome: 'ADMINISTRADOR' },
+       { id: 1, nome: 'COMERCIAL' },
+       { id: 2, nome: 'FINANCEIRO' },
+       { id: 3, nome: 'ASSOCIADO' },
+       { id: 4, nome: 'ATENDENTE' },
+     ];
 
     /*-------------------------------------------------------------------
      *                           BEHAVIORS
@@ -35,48 +41,6 @@ export class UsuarioFormulario
      */
     private voltarListagem(){
       this.router.navigate(['/usuario-listagem']);
-    }
-
-    private criarFormulario(){
-      console.log(JSON.stringify(this.usuario));
-
-      this.elements = [
-        {
-          name: 'id',
-          label: 'ID',
-          default: this.usuario.id,
-          type: TdDynamicElement.Input,
-          required: false,
-        },
-        {
-          name: 'email',
-          label: 'E-mail',
-          default: this.usuario.username,
-          type: TdDynamicElement.Input,
-          required: false,
-        },
-        {
-          "name": "senha",
-          "label": "Senha",
-          "type": TdDynamicElement.Password,
-          "required": true
-        },
-        {
-          name: 'perfil',
-          label: 'Perfil',
-          type: TdDynamicType.Array,
-          selections: [
-            "ASSOCIADO","ADMINISTRADOR","ATENDENTE","COMERCIAL","FINANCEIRO"
-          ],
-          default: this.usuario.perfil,
-        },
-        {
-          "name": "ativo",
-          "label": "Ativo",
-          default: this.usuario.ativo,
-          "type": TdDynamicType.Boolean
-        },
-      ];
     }
 
     constructor(private router: Router, private route: ActivatedRoute, private _dialogService: TdDialogService){
@@ -89,8 +53,8 @@ export class UsuarioFormulario
       if(this.id > 0) {
         Broker.of("usuarioServico").promise("buscarUsuarioPorId", this.id)
             .then( (result) => {
-                this.usuario = result;
-                this.criarFormulario();
+                  this.usuario = result;
+                  console.log(JSON.stringify(result));
             })
             .catch( (message) => {
               this._dialogService.openAlert({
@@ -102,8 +66,7 @@ export class UsuarioFormulario
         );
       }
       else {
-        this.criarFormulario();
-        this.excluirRegistro = true; //botão excluir invisivel
+        this.alterarRegistro = true; //botão excluir invisivel
       }
     }
 
@@ -116,32 +79,12 @@ export class UsuarioFormulario
 
     public onSalvar():void
     {
-      if(document.forms["0"].className.indexOf('ng-valid') > 0) {
-        Broker.of("usuarioServico").promise("getInstancia")
+      console.log(JSON.stringify(this.usuario));
+      Broker.of("usuarioServico").promise(((this.id > 0) ? "alterar" : "inserir") + "Usuario", this.usuario)
             .then( (result) => {
-                this.usuario = result;
-                this.usuario.id = (this.id > 0) ? this.id : 0;
-                this.usuario.email = document.forms["0"][1].value;
-                this.usuario.senha = document.forms["0"][2].value;
-                this.usuario.perfil = document.all["perfil"].outerText.replace('Perfil\n','').replace('\n','');
-                this.usuario.ativo = document.forms["0"][3].checked;
-                this.usuario.excluido = false;
-                console.log(JSON.stringify(this.usuario));
-
-                Broker.of("usuarioServico").promise("salvarUsuario", this.usuario)
-                      .then( (result) => {
-                        console.log(result);
-                        this.usuario = result;
-                        this.voltarListagem();
-                      })
-                      .catch( (message) => {
-                        this._dialogService.openAlert({
-                            message: message,
-                            title: 'Alerta',
-                            closeButton: 'OK',
-                        });
-                      }
-                );
+              console.log(result);
+              this.usuario = result;
+              this.voltarListagem();
             })
             .catch( (message) => {
               this._dialogService.openAlert({
@@ -150,13 +93,12 @@ export class UsuarioFormulario
                   closeButton: 'OK',
               });
             }
-        );
-      }
+      );
     }
     public onExcluir(registro):void
     {
       this._dialogService.openConfirm( {
-        message: 'Tem certeza que deseja excluir?',
+        message: 'Tem certeza que deseja inativar?',
         disableClose: false,
         title: 'Confirmação',
         cancelButton: 'Não',

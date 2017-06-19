@@ -5,13 +5,75 @@
       <span class="md-title">Formulário de Associado</span>
     </span>
   </div>
-  <td-dynamic-forms #formulario [elements]="elements" [FormGroup]="formulario" (submit)="onSalvar()">
+  <br>
+  <div flex="100" class="flex flex-col pad-left-sm">
+    <form #formulario="ngForm" layout="column" layout-margin>
+      <!--<fieldset class="standard">
+        <legend>Dados Pessoais</legend>-->
+        <md-input-container class="md-block">
+          <input type="text" maxlength="100" mdInput placeholder="Nome" [(ngModel)]="associado.nome" required name="nome"/>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <input type="text" maxlength="20" mdInput placeholder="RG" [(ngModel)]="associado.rg" required name="rg"/>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <input type="text" maxlength="11" mdInput (keypress)="soNumero($event)" placeholder="CPF" [(ngModel)]="associado.cpf" required name="cpf"/>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <input type="date" maxlength="10" mdInput placeholder="Data Nascimento" [(ngModel)] ="associado.dataNascimento" required name="dataNascimento"/>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <input type="text" maxlength="20" mdInput placeholder="Telefone" [(ngModel)]="associado.telefone" required name="telefone"/>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <input type="text" maxlength="20" mdInput placeholder="Celular" [(ngModel)]="associado.celular" required name="celular"/>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <input type="text" maxlength="8" mdInput (keypress)="soNumero($event)" placeholder="CEP" [(ngModel)]="associado.cep" required name="cep"/>
+        </md-input-container>
+      <!--</fieldset>
+      <fieldset class="standard">
+        <legend>Endereço</legend>-->
+        <md-input-container class="md-block">
+          <input type="text" maxlength="50" mdInput placeholder="Logradouro" [(ngModel)]="associado.logradouro" required name="logradouro"/>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <input type="text" maxlength="5" mdInput placeholder="Número" [(ngModel)]="associado.numero" required name="numero"/>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <input type="text" maxlength="20" mdInput placeholder="Bairro" [(ngModel)]="associado.bairro" required name="bairro"/>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <input type="text" maxlength="50" mdInput placeholder="Complemento" [(ngModel)]="associado.complemento" name="complemento"/>
+        </md-input-container>
+        <br>
+        <div>
+          <md-select style="width:100%" placeholder="Estado" [(ngModel)]="estado" name="estado" (ngModelChange)="carregarCidade()" required>
+            <md-option *ngFor="let estado of estados" [value]="estado.id">
+              {{ estado.nome }}
+            </md-option>
+          </md-select>
+        </div>
+        <br>
+        <div>
+          <md-select style="width:100%" placeholder="Cidade" [(ngModel)]="cidade" required name="cidade">
+            <md-option *ngFor="let cidade of cidades" [value]="cidade.id">
+              {{ cidade.nome }}
+            </md-option>
+          </md-select>
+        </div>
+      <!--</fieldset>-->
+    </form>
+
     <md-toolbar>
-      <button type="submit" md-button color="accent" class="text-upper">Salvar</button>
-      <div [hidden]="excluirRegistro">
-        <button type="button" (click)="onExcluir()" md-button class="text-upper">Excluir</button>
+      <button [disabled]="!formulario.form.valid" md-raised-button color="primary" (click)="onSalvar()">
+        Salvar
+      </button>
+      <div [hidden]="alterarRegistro">
+        <button type="button" (click)="onExcluir()" md-button class="text-upper">Inativar</button>
       </div>
       <button type="button" routerLink="/associado-listagem" md-button class="text-upper">Voltar</button>
     </md-toolbar>
-  </td-dynamic-forms>
+
+  </div>
 </md-card>

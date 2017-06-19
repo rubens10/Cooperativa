@@ -33,7 +33,7 @@ export class FarmaciaView //implements OnInit
      *
      */
      constructor(/*private route: ActivatedRoute,*/ private _dialogService: TdDialogService){
-       Broker.of("farmaciaServico").promise("buscarFarmaciasExcluidas", "false")
+       Broker.of("farmaciaServico").promise("buscarFarmaciasPorFiltros", "")
            .then( (result) => {
                this.farmacias = result.content;
                //console.log(this.farmacia);

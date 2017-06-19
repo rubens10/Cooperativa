@@ -68,11 +68,13 @@ public class Funcionario extends AbstractEntity implements Serializable
 	/**
 	 * 
 	 */
+	@NotNull
 	@Column(name = "telefone", length = 20)
 	private String telefone;
 	/**
 	 * 
 	 */
+	@NotNull
 	@Column(name = "celular", length = 20)
 	private String celular;
 	/**
@@ -81,12 +83,6 @@ public class Funcionario extends AbstractEntity implements Serializable
 	@NotNull
 	@Column(name = "ativo", nullable = false)
 	private Boolean ativo;
-	/**
-	 * 
-	 */
-	@NotNull
-	@Column(name = "excluido", nullable = false)
-	private Boolean excluido;
 
 	/*-------------------------------------------------------------------
 	 * 		 					CONSTRUCTORS
@@ -123,9 +119,8 @@ public class Funcionario extends AbstractEntity implements Serializable
 	 * @param complemento
 	 * @param dataCadastro
 	 * @param ativo
-	 * @param excluido
 	 */
-	public Funcionario( Long id, String nome, String rg, String cpf, Calendar dataNascimento, String telefone, String celular, Boolean ativo, Boolean excluido)
+	public Funcionario( Long id, String nome, String rg, String cpf, Calendar dataNascimento, String telefone, String celular, Boolean ativo)
 	{
 		super( id );
 		this.nome = nome;
@@ -135,7 +130,6 @@ public class Funcionario extends AbstractEntity implements Serializable
 		this.telefone = telefone;
 		this.celular = celular;
 		this.ativo = ativo;
-		this.excluido = excluido;
 	}
 
 	/*-------------------------------------------------------------------

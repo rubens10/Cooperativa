@@ -29,16 +29,7 @@ public interface IUsuarioRepositorio extends JpaRepository<Usuario, Long>
 	 * @return
 	 */
 	@Query(value="FROM Usuario usuario " +
-				  "WHERE ( FILTER(usuario.id, :filter) = TRUE "
+				  "WHERE usuario.ativo = true AND ( FILTER(usuario.id, :filter) = TRUE "
 				  	 + "OR FILTER(usuario.email, :filter) = TRUE )" )
 	public Page<Usuario> listByFilters( @Param("filter") String filter, Pageable pageable );
-	
-	/**
-	 * @param filter
-	 * @param pageable
-	 * @return
-	 */
-	@Query(value="FROM Usuario usuario " +
-				  "WHERE ( FILTER(usuario.excluido, :filter) = TRUE )" )
-	public Page<Usuario> listarPorExcluido( @Param("filter") String filter, Pageable pageable );
 }

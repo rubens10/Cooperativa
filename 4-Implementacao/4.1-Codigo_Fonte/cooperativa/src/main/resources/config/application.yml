@@ -67,7 +67,7 @@ logging.level:
 
 #FLYWAY
 flyway:
-  enabled: true
+  enabled: false
   check-location: true
   schemas: public
   locations: classpath:db/migration

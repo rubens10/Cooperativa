@@ -5,6 +5,8 @@ import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
@@ -13,9 +15,12 @@ import org.directwebremoting.annotations.DataTransferObject;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.validator.constraints.Email;
 //import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.br.CNPJ;
 
+import br.com.eits.boot.domain.entity.endereco.Cidade;
 import br.com.eits.common.domain.entity.AbstractEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -69,6 +74,7 @@ public class Farmacia extends AbstractEntity implements Serializable
 	 */
 	@NotNull
 	@NotBlank
+	@CNPJ(message="CNPJ informado é inválido")
 	@Column(name = "cnpj", nullable = false, length = 14)
 	private String cnpj;
 	/**
@@ -90,6 +96,7 @@ public class Farmacia extends AbstractEntity implements Serializable
 	 */
 	@NotNull
 	@NotBlank
+	@Email(message="E-mail informado é inválido")
 	@Column(name = "email", nullable = false, length = 50)
 	private String email;
 	/**
@@ -123,35 +130,17 @@ public class Farmacia extends AbstractEntity implements Serializable
 	/**
 	 * 
 	 */
-	@NotNull
-	@NotBlank
-	@Column(name = "complemento", nullable = false, length = 50)
+	@Column(name = "complemento", length = 50)
 	private String complemento;
 	/**
 	 * 
 	 */
-	//@NotNull
-	//@NotBlank
-	//@Column(name = "id_cidade", nullable = false)
-	//private String cidade;
+	@ManyToOne
+	@JoinColumn(name = "cidade_id", nullable = false)
+	private Cidade cidade;
 	/**
 	 * 
 	 */
-	//@NotNull
-	//@NotBlank
-	//@Column(name = "id_estado", nullable = false)
-	//private String estado;
-	/**
-	 * 
-	 */
-	//@NotNull
-	//@NotBlank
-	//@Column(name = "id_pais", nullable = false)
-	//private String pais;
-	/**
-	 * 
-	 */
-	@NotNull
 	@Column(name = "info_complementar", nullable = false, length = 255)
 	private String informacaoComplementar;
 	/**
@@ -160,12 +149,6 @@ public class Farmacia extends AbstractEntity implements Serializable
 	@NotNull
 	@Column(name = "ativo", nullable = false)
 	private Boolean ativo;
-	/**
-	 * 
-	 */
-	@NotNull
-	@Column(name = "excluido", nullable = false)
-	private Boolean excluido;
 
 	/*-------------------------------------------------------------------
 	 * 		 					CONSTRUCTORS
@@ -201,13 +184,10 @@ public class Farmacia extends AbstractEntity implements Serializable
 	 * @param bairro
 	 * @param complemento
 	 * @param cidade
-	 * @param estado
-	 * @param pais
 	 * @param informacaoComplementar
 	 * @param ativo
-	 * @param excluido
 	 */          
-	public Farmacia( Long id, String razaoSocial, String nomeFantasia, String cnpj, String inscricaoEstadual, String telefone, String email, String cep, String logradouro, String numero, String bairro, String complemento, String cidade, String estado, String pais, String informacaoComplementar, Boolean ativo, Boolean excluido)
+	public Farmacia( Long id, String razaoSocial, String nomeFantasia, String cnpj, String inscricaoEstadual, String telefone, String email, String cep, String logradouro, String numero, String bairro, String complemento, String informacaoComplementar, Boolean ativo)
 	{
 		super( id );
 		this.razaoSocial = razaoSocial;
@@ -221,12 +201,8 @@ public class Farmacia extends AbstractEntity implements Serializable
 		this.numero = numero;
 		this.bairro = bairro;
 		this.complemento = complemento;
-		//this.cidade = cidade;
-		//this.estado = estado;
-		//this.pais = pais;
 		this.informacaoComplementar = informacaoComplementar;
 		this.ativo = ativo;
-		this.excluido = excluido;
 	}
 
 	/*-------------------------------------------------------------------

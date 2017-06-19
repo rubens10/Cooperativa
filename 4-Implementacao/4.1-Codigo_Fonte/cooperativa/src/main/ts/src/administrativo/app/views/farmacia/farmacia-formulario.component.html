@@ -5,13 +5,72 @@
       <span class="md-title">Formulário de Farmácia</span>
     </span>
   </div>
-  <td-dynamic-forms #formulario [elements]="elements" [FormGroup]="formulario" (submit)="onSalvar()">
+  <br>
+  <div flex="100" class="flex flex-col pad-left-sm">
+    <form #formulario="ngForm" layout="column" layout-margin>
+      <md-input-container class="md-block">
+        <input type="text" maxlength="100" mdInput placeholder="Razão Social" [(ngModel)]="farmacia.razaoSocial" required name="razaoSocial"/>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <input type="text" maxlength="100" mdInput placeholder="Nome Fantasia" [(ngModel)]="farmacia.nomeFantasia" required name="nomeFantasia"/>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <input type="text" maxlength="14" mdInput placeholder="CNPJ" [(ngModel)]="farmacia.cnpj" required name="cnpj"/>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <input type="text" maxlength="11" mdInput placeholder="Inscrição Estadual" [(ngModel)]="farmacia.inscricaoEstadual" required name="inscricaoEstadual"/>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <input type="text" maxlength="20" mdInput placeholder="Telefone" [(ngModel)]="farmacia.telefone" required name="telefone"/>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <input type="email" maxlength="50" mdInput placeholder="E-mail" [(ngModel)]="farmacia.email" required name="email"/>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <input type="text" maxlength="8" mdInput placeholder="CEP" [(ngModel)]="farmacia.cep" required name="cep"/>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <input type="text" maxlength="50" mdInput placeholder="Logradouro" [(ngModel)]="farmacia.logradouro" required name="logradouro"/>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <input type="text" maxlength="5" mdInput placeholder="Número" [(ngModel)]="farmacia.numero" required name="numero"/>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <input type="text" maxlength="20" mdInput placeholder="Bairro" [(ngModel)]="farmacia.bairro" required name="bairro"/>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <input type="text" maxlength="50" mdInput placeholder="Complemento" [(ngModel)]="farmacia.complemento" name="complemento"/>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <input type="text" maxlength="255" mdInput placeholder="Informação Complementar" [(ngModel)]="farmacia.informacaoComplementar" name="informacaoComplementar"/>
+      </md-input-container>
+      <br>
+      <div>
+        <md-select style="width:100%" placeholder="Estado" [(ngModel)]="estado" name="estado" (ngModelChange)="carregarCidade()" required>
+          <md-option *ngFor="let estado of estados" [value]="estado.id">
+            {{ estado.nome }}
+          </md-option>
+        </md-select>
+      </div>
+      <br>
+      <div>
+        <md-select style="width:100%" placeholder="Cidade" [(ngModel)]="cidade" required name="cidade">
+          <md-option *ngFor="let cidade of cidades" [value]="cidade.id">
+            {{ cidade.nome }}
+          </md-option>
+        </md-select>
+      </div>
+    </form>
+
     <md-toolbar>
-      <button type="submit" md-button color="accent" class="text-upper">Salvar</button>
-      <div [hidden]="excluirRegistro">
-        <button type="button" (click)="onExcluir()" md-button class="text-upper">Excluir</button>
+      <button [disabled]="!formulario.form.valid" md-raised-button color="primary" (click)="onSalvar()">
+        Salvar
+      </button>
+      <div [hidden]="alterarRegistro">
+        <button type="button" (click)="onExcluir()" md-button class="text-upper">Inativar</button>
       </div>
       <button type="button" routerLink="/farmacia-listagem" md-button class="text-upper">Voltar</button>
     </md-toolbar>
-  </td-dynamic-forms>
+
+  </div>
 </md-card>

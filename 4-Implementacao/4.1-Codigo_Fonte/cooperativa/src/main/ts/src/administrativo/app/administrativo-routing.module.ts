@@ -11,6 +11,8 @@ import { FarmaciaFormulario } from './views/farmacia/farmacia-formulario.compone
 import { FarmaciaView } from './views/farmacia/farmacia-view.component';
 import { FuncionarioFormulario } from './views/funcionario/funcionario-formulario.component';
 import { FuncionarioView } from './views/funcionario/funcionario-view.component';
+import { AtendimentoFormulario } from './views/atendimento/atendimento-formulario.component';
+import { AtendimentoView } from './views/atendimento/atendimento-view.component';
 
 const routes: Routes = [
   {
@@ -65,6 +67,18 @@ const routes: Routes = [
         path: 'funcionario-listagem',
         component: FuncionarioView
       },
+      {
+         path: 'atendimento-formulario',
+         component: AtendimentoFormulario
+       },
+       {
+          path: 'atendimento-formulario/:id',
+          component: AtendimentoFormulario
+       },
+       {
+         path: 'atendimento-listagem',
+         component: AtendimentoView
+       },
 ];
 
 /**

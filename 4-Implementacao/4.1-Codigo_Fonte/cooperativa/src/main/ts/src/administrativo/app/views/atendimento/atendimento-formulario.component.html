@@ -1,0 +1,68 @@
+<md-card>
+  <br>
+  <div layout="row" layout-align="start center" class="pad-left-sm pad-right-sm">
+    <span class="push-left-sm">
+      <span class="md-title">Formulário de Atendimento</span>
+    </span>
+  </div>
+  <br>
+  <div flex="100" class="flex flex-col pad-left-sm">
+    <form #formulario="ngForm" layout="column" layout-margin>
+      <div>
+        <md-select style="width:100%" placeholder="Situação" [(ngModel)]="atendimento.situacao" name="situacao" required>
+          <md-option *ngFor="let situacao of situacoes" [value]="situacao.valor">
+            {{ situacao.nome }}
+          </md-option>
+        </md-select>
+      </div>
+      <br>
+      <div>
+        <md-select style="width:100%" placeholder="Assunto" [(ngModel)]="atendimento.assunto" name="assunto" required>
+          <md-option *ngFor="let assunto of assuntos" [value]="assunto.valor">
+            {{ assunto.nome }}
+          </md-option>
+        </md-select>
+      </div>
+      <br>
+      <div>
+        <md-select style="width:100%" placeholder="Funcionario" [(ngModel)]="funcionario" name="funcionario" required>
+          <md-option *ngFor="let funcionario of funcionarios" [value]="funcionario">
+            {{ funcionario.nome }}
+          </md-option>
+        </md-select>
+      </div>
+      <br>
+      <div>
+        <md-select style="width:100%" placeholder="Associado" [(ngModel)]="associado" name="associado" required>
+          <md-option *ngFor="let associado of associados" [value]="associado.id">
+            {{ associado.nome }}
+          </md-option>
+        </md-select>
+      </div>
+      <br>
+      <md-input-container class="md-block">
+        <input type="date" mdInput placeholder="Data Previsão" [(ngModel)] ="atendimento.dataPrevisao" name="dataPrevisao"/>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <input type="date" mdInput placeholder="Data Conclusão" [(ngModel)] ="atendimento.dataConclusao" name="dataConclusao"/>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <input type="text" maxlength="50" mdInput placeholder="Mensagem" [(ngModel)]="atendimento.mensagem" required name="mensagem"/>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <input type="text" maxlength="50" mdInput placeholder="Obs. Interna" [(ngModel)]="atendimento.observacaoInterna" name="observacaoInterna"/>
+      </md-input-container>
+    </form>
+
+    <md-toolbar>
+      <button [disabled]="!formulario.form.valid" md-raised-button color="primary" (click)="onSalvar()">
+        Salvar
+      </button>
+      <div [hidden]="alterarRegistro">
+        <button type="button" (click)="onExcluir()" md-button class="text-upper">Inativar</button>
+      </div>
+      <button type="button" routerLink="/atendimento-listagem" md-button class="text-upper">Voltar</button>
+    </md-toolbar>
+
+  </div>
+</md-card>

@@ -69,12 +69,6 @@ public class Usuario extends AbstractEntity implements Serializable, UserDetails
 	@NotNull
 	@Column(name = "ativo", nullable = false)
 	private Boolean ativo;
-	/**
-	 * 
-	 */
-	@NotNull
-	@Column(name = "excluido", nullable = false)
-	private Boolean excluido;
 
 	/*-------------------------------------------------------------------
 	 * 		 					CONSTRUCTORS
@@ -102,16 +96,14 @@ public class Usuario extends AbstractEntity implements Serializable, UserDetails
 	 * @param senha
 	 * @param ativo
 	 * @param perfil
-	 * @param excluido
 	 */
-	public Usuario( Long id, String email, String senha, Boolean ativo, UsuarioPerfil perfil, Boolean excluido)
+	public Usuario( Long id, String email, String senha, Boolean ativo, UsuarioPerfil perfil)
 	{
 		super( id );
 		this.email = email;
 		this.ativo = ativo;
 		this.senha = senha;
 		this.perfil = perfil;
-		this.excluido = excluido;
 	}
 
 	/*-------------------------------------------------------------------

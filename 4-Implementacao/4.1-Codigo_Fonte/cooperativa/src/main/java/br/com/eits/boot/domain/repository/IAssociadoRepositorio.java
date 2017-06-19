@@ -22,16 +22,7 @@ public interface IAssociadoRepositorio extends JpaRepository<Associado, Long>
 	 * @return
 	 */
 	@Query(value="FROM Associado associado " +
-				  "WHERE ( FILTER(associado.id, :filter) = TRUE "
-				  	 + "OR FILTER(associado.nome, :filter) = TRUE )" )
+				  "WHERE associado.ativo = true AND ( FILTER(associado.id, :filter) = TRUE "
+				  	 + "OR FILTER(associado.nome, :filter) = TRUE OR FILTER(associado.cpf, :filter) = TRUE  OR FILTER(associado.telefone, :filter) = TRUE OR FILTER(associado.celular, :filter) = TRUE )" )
 	public Page<Associado> listByFilters( @Param("filter") String filter, Pageable pageable );
-	
-	/**
-	 * @param filter
-	 * @param pageable
-	 * @return
-	 */
-	@Query(value="FROM Associado associado " +
-				  "WHERE ( FILTER(associado.excluido, :filter) = TRUE )" )
-	public Page<Associado> listarPorExcluido( @Param("filter") String filter, Pageable pageable );
 }

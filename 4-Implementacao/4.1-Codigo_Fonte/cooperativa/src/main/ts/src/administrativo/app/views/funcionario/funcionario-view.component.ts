@@ -32,7 +32,7 @@ export class FuncionarioView //implements OnInit
      *
      */
      constructor(/*private route: ActivatedRoute,*/ private _dialogService: TdDialogService){
-       Broker.of("funcionarioServico").promise("buscarFuncionariosExcluidos", "false")
+       Broker.of("funcionarioServico").promise("buscarFuncionariosPorFiltros", "")
            .then( (result) => {
                this.funcionarios = result.content;
                //console.log(this.funcionario);

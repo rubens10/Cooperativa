@@ -5,13 +5,42 @@
       <span class="md-title">Formulário de Usuário</span>
     </span>
   </div>
-  <td-dynamic-forms #formulario [elements]="elements" [FormGroup]="formulario" (submit)="onSalvar()">
+
+  <p></p>
+
+  <div class="pad-left-sm">
+    <form #formulario="ngForm" layout="column" layout-margin>
+      <md-input-container flex>
+        <input type="email" mdInput placeholder="E-mail" [(ngModel)]="usuario.email" required name="email"/>
+      </md-input-container>
+      <div flex [hidden]="!alterarRegistro">
+        <md-input-container flex>
+          <input type="password" mdInput placeholder="Senha" [(ngModel)]="usuario.senha" required name="senha" minlength="8" />
+        </md-input-container>
+        <md-input-container flex>
+          <input type="password" mdInput placeholder="Repetir senha" [(ngModel)]="usuario.confirmarSenha" required name="senha"/>
+        </md-input-container>
+        <div class="warning" [hidden]="usuario.senha == usuario.confirmarSenha || !usuario.confirmarSenha">Senhas não conferem</div>
+        <!--<div [hidden]="usuario.senha.errors.minlength">A senha deve conter ao menos 8 caracteres</div>-->
+      </div>
+      <div flex>
+        <md-select style="width:100%" placeholder="Perfil" [(ngModel)]="usuario.perfil" required name="perfil">
+          <md-option *ngFor="let perfil of perfis" [value]="perfil.nome">
+            {{ perfil.nome }}
+          </md-option>
+        </md-select>
+      </div>
+    </form>
+
     <md-toolbar>
-      <button type="submit" md-button color="accent" class="text-upper">Salvar</button>
-      <div [hidden]="excluirRegistro">
-        <button type="button" (click)="onExcluir()" md-button class="text-upper">Excluir</button>
+      <button [disabled]="!formulario.form.valid" md-raised-button color="primary" (click)="onSalvar()">
+        Salvar
+      </button>
+      <div [hidden]="alterarRegistro">
+        <button type="button" (click)="onExcluir()" md-button class="text-upper">Inativar</button>
       </div>
       <button type="button" routerLink="/usuario-listagem" md-button class="text-upper">Voltar</button>
     </md-toolbar>
-  </td-dynamic-forms>
+
+  </div>
 </md-card>

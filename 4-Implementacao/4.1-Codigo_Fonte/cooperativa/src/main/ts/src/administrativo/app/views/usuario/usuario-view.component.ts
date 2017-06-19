@@ -33,7 +33,7 @@ export class UsuarioView //implements OnInit
      *
      */
      constructor(/*private route: ActivatedRoute,*/ private _dialogService: TdDialogService){
-       Broker.of("usuarioServico").promise("buscarUsuariosExcluidos", "false")
+       Broker.of("usuarioServico").promise("buscarUsuariosPorFiltros", "")
            .then( (result) => {
                this.usuarios = result.content;
                //console.log(this.usuario);

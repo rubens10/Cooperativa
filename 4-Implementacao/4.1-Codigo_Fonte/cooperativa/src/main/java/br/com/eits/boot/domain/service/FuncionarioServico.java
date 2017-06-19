@@ -44,12 +44,22 @@ public class FuncionarioServico
 	 * @param user
 	 * @return
 	 */
-	public Funcionario salvarFuncionario( Funcionario funcionario )
+	@PreAuthorize("hasAnyAuthority('"+UsuarioPerfil.ADMINISTRADOR_VALOR+"','"+UsuarioPerfil.COMERCIAL_VALOR+"')")
+	public Funcionario inserirFuncionario( Funcionario funcionario )
 	{
-		System.out.println( funcionario );
+		funcionario.setAtivo( true );
 		return this.funcionarioRepositorio.save( funcionario );
 	}
-	
+	/**
+	 * 
+	 * @param user
+	 * @return
+	 */
+	@PreAuthorize("hasAnyAuthority('"+UsuarioPerfil.ADMINISTRADOR_VALOR+"','"+UsuarioPerfil.COMERCIAL_VALOR+"')")
+	public Funcionario alterarFuncionario( Funcionario funcionario )
+	{
+		return this.funcionarioRepositorio.save( funcionario );
+	}
 	/**
 	 * 
 	 * @param id
@@ -60,21 +70,8 @@ public class FuncionarioServico
 	{
 		final Funcionario funcionario = this.funcionarioRepositorio.findOne( id );
 		funcionario.setAtivo( false );
-		funcionario.setExcluido( true );
 	
 		return this.funcionarioRepositorio.save( funcionario );
-	}
-
-	/**
-	 * 
-	 */
-	public Funcionario getInstancia()
-	{
-		final Funcionario funcionario = new Funcionario();
-		funcionario.setAtivo( false );
-		funcionario.setExcluido( false );
-	
-		return funcionario;
 	}
 	
 	/**
@@ -105,21 +102,10 @@ public class FuncionarioServico
 	/**
 	 * 
 	 * @param pageable
-	 * @param filter
-	 * @return
-	 */
-	@Transactional(readOnly=true)
-	public Page<Funcionario> buscarFuncionariosExcluidos( String filter, PageRequest pageable )
-	{
-		return this.funcionarioRepositorio.listarPorExcluido( filter, pageable );
-	}
-	/**
-	 * 
-	 * @param pageable
 	 * @param filters
 	 * @return
 	 */
-	public Page<Funcionario> listarUsuariosPorFiltros( String filter, PageRequest pageable )
+	public Page<Funcionario> listarFuncionariosPorFiltros( String filter, PageRequest pageable )
 	{
 		return this.funcionarioRepositorio.listByFilters( filter, pageable );
 		

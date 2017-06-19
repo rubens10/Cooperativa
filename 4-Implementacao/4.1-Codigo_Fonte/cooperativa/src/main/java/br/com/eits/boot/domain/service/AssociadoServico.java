@@ -10,9 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import br.com.eits.boot.domain.entity.Associado;
-import br.com.eits.boot.domain.entity.Funcionario;
-import br.com.eits.boot.domain.entity.conta.Usuario;
 import br.com.eits.boot.domain.entity.conta.UsuarioPerfil;
+import br.com.eits.boot.domain.entity.endereco.Cidade;
 import br.com.eits.boot.domain.repository.IAssociadoRepositorio;
 import br.com.eits.common.application.i18n.MessageSourceHolder;
 
@@ -35,6 +34,7 @@ public class AssociadoServico
 	 */
 	@Autowired
 	private IAssociadoRepositorio associadoRepositorio;
+	private Cidade cidadeTemp;
 
 	/*-------------------------------------------------------------------
 	 *				 		     SERVICES
@@ -44,8 +44,31 @@ public class AssociadoServico
 	 * @param user
 	 * @return
 	 */
-	public Associado salvarAssociado( Associado associado )
+	@PreAuthorize("hasAnyAuthority('"+UsuarioPerfil.ADMINISTRADOR_VALOR+"','"+UsuarioPerfil.COMERCIAL_VALOR+"')")
+	public Associado inserirAssociado( Associado associado, Long cidade )
 	{
+		associado.setAtivo(true);
+		
+		if(cidade > 0) {
+			cidadeTemp = new Cidade(cidade);
+			associado.setCidade( cidadeTemp );
+		}
+		
+		return this.associadoRepositorio.save( associado );
+	}
+	/**
+	 * 
+	 * @param user
+	 * @return
+	 */
+	@PreAuthorize("hasAnyAuthority('"+UsuarioPerfil.ADMINISTRADOR_VALOR+"','"+UsuarioPerfil.COMERCIAL_VALOR+"')")
+	public Associado alterarAssociado( Associado associado, Long cidade )
+	{
+		if(cidade > 0) {
+			cidadeTemp = new Cidade(cidade);
+			associado.setCidade( cidadeTemp );
+		}
+		
 		return this.associadoRepositorio.save( associado );
 	}
 	
@@ -59,21 +82,8 @@ public class AssociadoServico
 	{
 		final Associado associado = this.associadoRepositorio.findOne( id );
 		associado.setAtivo( false );
-		associado.setExcluido( true );
 	
 		return this.associadoRepositorio.save( associado );
-	}
-
-	/**
-	 * 
-	 */
-	public Associado getInstancia()
-	{
-		final Associado associado = new Associado();
-		associado.setAtivo( false );
-		associado.setExcluido( false );
-	
-		return associado;
 	}
 	
 	/**
@@ -101,17 +111,6 @@ public class AssociadoServico
 		return this.associadoRepositorio.listByFilters( filter, pageable );
 	}
 
-	/**
-	 * 
-	 * @param pageable
-	 * @param filter
-	 * @return
-	 */
-	@Transactional(readOnly=true)
-	public Page<Associado> buscarAssociadosExcluidos( String filter, PageRequest pageable )
-	{
-		return this.associadoRepositorio.listarPorExcluido( filter, pageable );
-	}
 	
 	/**
 	 * 
@@ -119,7 +118,7 @@ public class AssociadoServico
 	 * @param filters
 	 * @return
 	 */
-	public Page<Associado> listarUsuariosPorFiltros( String filter, PageRequest pageable )
+	public Page<Associado> listarAssociadosPorFiltros( String filter, PageRequest pageable )
 	{
 		return this.associadoRepositorio.listByFilters( filter, pageable );
 		

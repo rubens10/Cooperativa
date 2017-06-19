@@ -22,21 +22,6 @@ public interface IFarmaciaRepositorio extends JpaRepository<Farmacia, Long>
 	 * @return
 	 */
 	@Query(value="FROM Farmacia farmacia " +
-				  "WHERE ( FILTER(farmacia.id, :filter) = TRUE )" )
-	
-
-	/*@Query(value="FROM Farmacia farmacia " +
-				  "WHERE ( FILTER(farmacia.id, :filter) = TRUE "
-				  	 + "OR FILTER(farmacia.nome_fantasia, :filter) = TRUE )" )*/
-	
+				  "WHERE farmacia.ativo = true AND ( FILTER(farmacia.id, :filter) = TRUE OR FILTER(farmacia.razaoSocial, :filter) = TRUE OR FILTER(farmacia.nomeFantasia, :filter) = TRUE OR FILTER(farmacia.cnpj, :filter) = TRUE OR FILTER(farmacia.email, :filter) = TRUE OR FILTER(farmacia.telefone, :filter) = TRUE OR FILTER(farmacia.cidade, :filter) = TRUE)" )
 	public Page<Farmacia> listByFilters( @Param("filter") String filter, Pageable pageable );
-
-	/**
-	 * @param filter
-	 * @param pageable
-	 * @return
-	 */
-	@Query(value="FROM Farmacia farmacia " +
-				  "WHERE ( FILTER(farmacia.excluido, :filter) = TRUE )" )
-	public Page<Farmacia> listarPorExcluido( @Param("filter") String filter, Pageable pageable );
 }

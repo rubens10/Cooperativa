@@ -39,8 +39,8 @@
         <h3 md-line>{{usuarios[i].email}}</h3> <!--Usuário {{i}}-->
         <p md-line></p>
         <span flex></span>
-        <span flex="30" class="md-body-1 tc-grey-500">{{usuarios[i].perfil}}</span>
-        <span flex="30" class="md-body-1 tc-grey-500">{{usuarios[i].updated}}</span>
+        <span flex="30" class="pad-left md-body-1 tc-grey-500">{{usuarios[i].perfil}}</span>
+        <span flex="30" class="md-body-1 tc-grey-500">{{usuarios[i].updated | date:'dd/MM/yyyy HH:mm:ss'}}</span>
       </a>
       <md-divider *ngIf="!last"></md-divider>
     </ng-template>

@@ -33,7 +33,7 @@ export class AssociadoView //implements OnInit
      *
      */
      constructor(/*private route: ActivatedRoute,*/ private _dialogService: TdDialogService){
-       Broker.of("associadoServico").promise("buscarAssociadosExcluidos", "false")
+       Broker.of("associadoServico").promise("buscarAssociadosPorFiltros", "")
            .then( (result) => {
                this.associados = result.content;
                //console.log(this.associado);
