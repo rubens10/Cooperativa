@@ -20,13 +20,13 @@
           <input type="text" maxlength="11" mdInput (keypress)="soNumero($event)" placeholder="CPF" [(ngModel)]="associado.cpf" required name="cpf"/>
         </md-input-container>
         <md-input-container class="md-block">
-          <input type="date" maxlength="10" mdInput placeholder="Data Nascimento" [(ngModel)] ="associado.dataNascimento" required name="dataNascimento"/>
+          <input type="date" maxlength="10" mdInput placeholder="Data Nascimento" [ngModel] ="associado.dataNascimento | date:'yyyy-MM-dd'" (ngModelChange)="associado.dataNascimento = $event" required name="dataNascimento"/>
         </md-input-container>
         <md-input-container class="md-block">
-          <input type="text" maxlength="20" mdInput placeholder="Telefone" [(ngModel)]="associado.telefone" required name="telefone"/>
+          <input type="text" maxlength="20" mdInput placeholder="Telefone" [(ngModel)]="associado.telefone" required name="telefone" />
         </md-input-container>
         <md-input-container class="md-block">
-          <input type="text" maxlength="20" mdInput placeholder="Celular" [(ngModel)]="associado.celular" required name="celular"/>
+          <input type="text" maxlength="20" mdInput placeholder="Celular" [(ngModel)]="associado.celular" required name="celular" />
         </md-input-container>
         <md-input-container class="md-block">
           <input type="text" maxlength="8" mdInput (keypress)="soNumero($event)" placeholder="CEP" [(ngModel)]="associado.cep" required name="cep"/>

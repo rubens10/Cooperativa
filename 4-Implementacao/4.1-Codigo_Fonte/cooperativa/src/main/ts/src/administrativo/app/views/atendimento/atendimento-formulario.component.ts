@@ -131,8 +131,15 @@ export class AtendimentoFormulario
       this.atendimento.dataPrevisao = new Date(this.atendimento.dataPrevisao+" 12:00:00 GMT");
       this.atendimento.dataConclusao = new Date(this.atendimento.dataConclusao+" 12:00:00 GMT");
 
-      console.log("associado: "+JSON.stringify(this.funcionario));
+      /*this.atendimento.associado = this.associado;
+      this.atendimento.funcionario = this.funcionario;
+
+      console.log(JSON.stringify(this.atendimento));*/
+
       console.log(JSON.stringify(this.atendimento));
+      console.log('idfun: '+ this.funcionario);
+      console.log('idass: '+ this.associado);
+
       Broker.of("atendimentoServico").promise(((this.id > 0) ? "alterar" : "inserir") + "Atendimento", this.atendimento, this.funcionario, this.associado)
             .then( (result) => {
               console.log(result);

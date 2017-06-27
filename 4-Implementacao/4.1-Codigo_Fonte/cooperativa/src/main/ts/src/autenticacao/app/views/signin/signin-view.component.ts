@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Http, URLSearchParams } from '@angular/http';
 
 /**
- * 
+ *
  */
 @Component( {
     selector: 'app-root',
@@ -11,17 +11,17 @@ import { Http, URLSearchParams } from '@angular/http';
 export class SigninView
 {
     /**
-     * 
+     *
      */
     constructor(private http:Http)
-    { 
+    {
     }
-    
+
     /*-------------------------------------------------------------------
      *                           ATTRIBUTES
      *-------------------------------------------------------------------*/
     /**
-     * 
+     *
      */
     private user:any = {};
 
@@ -29,17 +29,18 @@ export class SigninView
      *                           BEHAVIORS
      *-------------------------------------------------------------------*/
     /**
-     * 
+     *
      */
     public onSignIn():void
     {
         const body = new URLSearchParams();
         body.set('email', this.user.email);
         body.set('password', this.user.password);
-        
+
         this.http.post("authenticate", body)
             .subscribe( result => {
-                window.location.replace('/');
+                window.location.href = '/administrativo';
+                //window.location.replace('/');
             });
     }
 }

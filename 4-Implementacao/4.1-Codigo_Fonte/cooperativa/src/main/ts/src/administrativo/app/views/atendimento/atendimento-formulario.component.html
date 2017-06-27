@@ -26,7 +26,7 @@
       <br>
       <div>
         <md-select style="width:100%" placeholder="Funcionario" [(ngModel)]="funcionario" name="funcionario" required>
-          <md-option *ngFor="let funcionario of funcionarios" [value]="funcionario">
+          <md-option *ngFor="let funcionario of funcionarios" [value]="funcionario.id">
             {{ funcionario.nome }}
           </md-option>
         </md-select>
@@ -41,10 +41,12 @@
       </div>
       <br>
       <md-input-container class="md-block">
-        <input type="date" mdInput placeholder="Data Previsão" [(ngModel)] ="atendimento.dataPrevisao" name="dataPrevisao"/>
+        <input type="date" mdInput placeholder="Data Previsão" [ngModel] ="atendimento.dataPrevisao | date:'yyyy-MM-dd'" (ngModelChange)="atendimento.dataPrevisao = $event" name="dataPrevisao"/>
+        <!--<input type="date" mdInput placeholder="Data Previsão" ([ngModel])="associado.dataPrevisao" name="dataPrevisao"/>-->
       </md-input-container>
       <md-input-container class="md-block">
-        <input type="date" mdInput placeholder="Data Conclusão" [(ngModel)] ="atendimento.dataConclusao" name="dataConclusao"/>
+        <input type="date" mdInput placeholder="Data Conclusão"  [ngModel] ="atendimento.dataConclusao | date:'yyyy-MM-dd'" (ngModelChange)="atendimento.dataConclusao = $event" name="dataConclusao"/>
+        <!--<input type="date" mdInput placeholder="Data Conclusão"  ([ngModel])="associado.dataConclusao" name="dataConclusao"/>-->
       </md-input-container>
       <md-input-container class="md-block">
         <input type="text" maxlength="50" mdInput placeholder="Mensagem" [(ngModel)]="atendimento.mensagem" required name="mensagem"/>
